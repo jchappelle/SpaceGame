@@ -7,10 +7,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.*;
 import com.jchappelle.sg.Constants;
 import com.jchappelle.sg.TransformComponent;
 
@@ -36,19 +33,29 @@ public class PhysicsSystem extends EntitySystem {
     }
 
     private void setupScreenBounds(){
-        createWall(Gdx.graphics.getWidth()- 1, 0, 1, Gdx.graphics.getHeight());
-        //createWall(0, 0, 1, Gdx.graphics.getHeight());
-        //createWall(0, 0, Gdx.graphics.getWidth(), 1);
-        //createWall(0, Gdx.graphics.getHeight(), Gdx.graphics.getWidth(), 1);
+        //Bottom
+        createWall(0, 0, Gdx.graphics.getWidth(), 1);
+        //Left
+        createWall(0, 0, 1, Gdx.graphics.getHeight());
+        //Right
+        createWall(Gdx.graphics.getWidth(), 0, 1, Gdx.graphics.getHeight());
+        //Top
+        createWall(0, Gdx.graphics.getHeight(), Gdx.graphics.getWidth(), 1);
     }
 
     private void createWall(float x, float y, float width, float height){
         BodyDef bodyDef = new BodyDef();
-        bodyDef.position.set(new Vector2(x, y));
+        bodyDef.position.set(new Vector2(x/ Constants.PIXELS_TO_METERS, y/ Constants.PIXELS_TO_METERS));
         Body body = world.createBody(bodyDef);
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(width, height);
-        body.createFixture(shape, 0.0f);
+        shape.setAsBox(width/ Constants.PIXELS_TO_METERS, height/ Constants.PIXELS_TO_METERS);
+        FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.shape = shape;
+        fixtureDef.density = 0.0f;
+        fixtureDef.filter.maskBits = Constants.MASK_BOUNDS;
+        fixtureDef.filter.categoryBits = Constants.CATEGORY_BOUNDS;
+
+        body.createFixture(fixtureDef);
         shape.dispose();
     }
 

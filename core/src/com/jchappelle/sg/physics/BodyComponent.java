@@ -15,7 +15,8 @@ public class BodyComponent implements Component {
 
     public Body body;
 
-    public BodyComponent(World world, float x, float y, float width, float height, float density){
+
+    public BodyComponent(World world, float x, float y, float width, float height, float density, short collisionCategory, short collisionMask){
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         bodyDef.position.set((x + width/2) / Constants.PIXELS_TO_METERS, (y + height/2) / Constants.PIXELS_TO_METERS);
@@ -29,6 +30,8 @@ public class BodyComponent implements Component {
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
         fixtureDef.density = density;
+        fixtureDef.filter.categoryBits = collisionCategory;
+        fixtureDef.filter.maskBits = collisionMask;
 
         body.createFixture(fixtureDef);
         shape.dispose();

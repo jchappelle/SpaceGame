@@ -54,14 +54,14 @@ public class Entities {
     }
 
     public Entity newShip(){
-        Entity entity = newEntity("ship.png", 0, 0, 10f);
+        Entity entity = newEntity("ship.png", 0, 0, 10f, Constants.CATEGORY_PLAYER, Constants.MASK_PLAYER);
         entity.add(new PlayerComponent());
         entity.add(new GunComponent());
         return entity;
     }
 
     public Entity newBullet(float x, float y){
-        Entity entity = newEntity("bullet.png", x, y, 10f);
+        Entity entity = newEntity("bullet.png", x, y, 10f, Constants.CATEGORY_ENEMY, Constants.MASK_ENEMY);
         BodyComponent bc = BodyComponent.get(entity);
         bc.body.applyForceToCenter(new Vector2(0, 1f), true);
         entity.add(bc);
@@ -69,15 +69,15 @@ public class Entities {
     }
 
     public Entity newAsteroid(float x, float y){
-        Entity entity = newEntity("asteroid.png", x, y, 10f);
+        Entity entity = newEntity("asteroid.png", x, y, 10f, Constants.CATEGORY_ENEMY, Constants.MASK_ENEMY);
 
         BodyComponent bc = BodyComponent.get(entity);
-        bc.body.applyForceToCenter(new Vector2(0, -10f), true);
+        bc.body.applyForceToCenter(new Vector2(0, -50f), true);
         entity.add(bc);
         return entity;
     }
 
-    private Entity newEntity(String spritePath, float x, float y, float density){
+    private Entity newEntity(String spritePath, float x, float y, float density, short collisionCategory, short collisionMask){
         Entity entity = new Entity();
         Sprite sprite = new Sprite(new Texture(spritePath));
         sprite.setOriginCenter();
@@ -85,7 +85,7 @@ public class Entities {
         entity.add(new SpriteComponent(sprite));
 
         TransformComponent tc = new TransformComponent(x, y, 0, sprite.getWidth(), sprite.getHeight());
-        entity.add(new BodyComponent(world, tc.x, tc.y, tc.width, tc.height, density));
+        entity.add(new BodyComponent(world, tc.x, tc.y, tc.width, tc.height, density, collisionCategory, collisionMask));
         entity.add(tc);
         return entity;
     }
