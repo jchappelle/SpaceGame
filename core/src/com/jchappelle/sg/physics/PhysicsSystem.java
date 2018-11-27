@@ -1,17 +1,15 @@
 package com.jchappelle.sg.physics;
 
-import com.badlogic.ashley.core.Engine;
-import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.core.EntitySystem;
-import com.badlogic.ashley.core.Family;
+import com.badlogic.ashley.core.*;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.utils.Queue;
 import com.jchappelle.sg.Constants;
 import com.jchappelle.sg.TransformComponent;
 
-public class PhysicsSystem extends EntitySystem {
+public class PhysicsSystem extends EntitySystem implements EntityListener {
 
     private ImmutableArray<Entity> entities;
     private World world;
@@ -22,6 +20,8 @@ public class PhysicsSystem extends EntitySystem {
     private static int POSITION_ITERATIONS = 2;
     private static float TIME_STEP = 1/60F;
 
+    private Queue<Body> queuedForRemoval = new Queue<Body>();
+
     public PhysicsSystem(World world){
         this.world = world;
     }
@@ -30,6 +30,7 @@ public class PhysicsSystem extends EntitySystem {
         this.engine = engine;
         this.entities = engine.getEntitiesFor(Family.all(BodyComponent.class, TransformComponent.class).get());
         setupScreenBounds();
+        this.engine.addEntityListener(this);
     }
 
     private void setupScreenBounds(){
@@ -64,9 +65,26 @@ public class PhysicsSystem extends EntitySystem {
     public void update(float deltaTime) {
         doPhysicsStep(deltaTime);
 
+        removeBodies();
+
         for(Entity entity : entities){
             updateTransform(entity);
         }
+    }
+
+    private void removeBodies(){
+        Body body = getNextBodyForRemoval();
+        while(body != null){
+            world.destroyBody(body);
+            body = getNextBodyForRemoval();
+        }
+    }
+
+    private Body getNextBodyForRemoval(){
+        if(queuedForRemoval.size > 0){
+            return queuedForRemoval.removeFirst();
+        }
+        return null;
     }
 
     private void doPhysicsStep(float deltaTime) {
@@ -88,5 +106,18 @@ public class PhysicsSystem extends EntitySystem {
         tc.y = (body.getPosition().y * Constants.PIXELS_TO_METERS);
 
         tc.rotation = ((float)Math.toDegrees(body.getAngle()));
+    }
+
+    @Override
+    public void entityAdded(Entity entity) {
+
+    }
+
+    @Override
+    public void entityRemoved(Entity entity) {
+        BodyComponent bc = BodyComponent.get(entity);
+        if(bc != null){
+            queuedForRemoval.addFirst(bc.body);
+        }
     }
 }
