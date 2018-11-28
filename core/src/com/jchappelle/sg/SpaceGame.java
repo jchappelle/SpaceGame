@@ -47,6 +47,7 @@ public class SpaceGame extends ApplicationAdapter {
 		engine.addSystem(new AsteroidSystem());
 		engine.addSystem(new DespawnSystem());
 		engine.addSystem(new DamageSystem());
+		engine.addSystem(new ScoreSystem());
 		//Should be added last to support CollisionListeners
 		engine.addSystem(new CollisionSystem(world));
 	}

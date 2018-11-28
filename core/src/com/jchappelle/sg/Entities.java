@@ -63,9 +63,10 @@ public class Entities {
     public Entity newBullet(float x, float y){
         Entity entity = newEntity("bullet.png", x, y, 10f, Constants.CATEGORY_PLAYER_BULLET, Constants.MASK_PLAYER_BULLET);
         BodyComponent bc = BodyComponent.get(entity);
-        bc.body.applyForceToCenter(new Vector2(0, 1f), true);
+        bc.body.applyForceToCenter(new Vector2(0, 20f), true);
         entity.add(bc);
 
+        entity.add(new HealthComponent(1));
         entity.add(new DamageComponent(100));
         return entity;
     }
@@ -78,6 +79,8 @@ public class Entities {
         entity.add(bc);
 
         entity.add(new HealthComponent(10));
+        entity.add(new DamageComponent(2));
+        entity.add(new ScoreComponent(10));
         return entity;
     }
 

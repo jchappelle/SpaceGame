@@ -9,4 +9,7 @@ public class PlayerComponent implements Component {
     public static PlayerComponent get(Entity entity){
         return mapper.get(entity);
     }
+
+    public int score;
+
 }

@@ -12,6 +12,7 @@ public class HealthComponent implements Component {
 
     public int maxHealth;
     public int health;
+    public Entity deathSource;
 
     public HealthComponent(int health){
         this.health = health;

@@ -30,10 +30,8 @@ public class DamageSystem extends EntitySystem implements CollisionListener {
             Entity entityA = collision.entityA;
             Entity entityB = collision.entityB;
 
-            if(!tryDamage(entityA, entityB)){
-                tryDamage(entityB, entityA);
-            }
-
+            tryDamage(entityA, entityB);
+            tryDamage(entityB, entityA);
         }
         collisions.clear();
     }
@@ -47,6 +45,7 @@ public class DamageSystem extends EntitySystem implements CollisionListener {
                 hc.health = 0;
             }
             if(hc.health == 0){
+                hc.deathSource = entityB;
                 engine.removeEntity(entityA);
             }
             return true;
