@@ -10,6 +10,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Disposable;
 import com.jchappelle.sg.enemies.AsteroidSystem;
+import com.jchappelle.sg.physics.CollisionSystem;
 import com.jchappelle.sg.physics.PhysicsSystem;
 import com.jchappelle.sg.physics.WorldComponent;
 import com.jchappelle.sg.player.GunSystem;
@@ -45,6 +46,9 @@ public class SpaceGame extends ApplicationAdapter {
 		engine.addSystem(new GunSystem());
 		engine.addSystem(new AsteroidSystem());
 		engine.addSystem(new DespawnSystem());
+		engine.addSystem(new DamageSystem());
+		//Should be added last to support CollisionListeners
+		engine.addSystem(new CollisionSystem(world));
 	}
 
 	@Override

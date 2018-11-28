@@ -5,9 +5,11 @@ public final class Constants {
     public static final short CATEGORY_PLAYER = 0x0001;  // 0000000000000001 in binary
     public static final short CATEGORY_ENEMY =  0x0002; //  0000000000000010 in binary
     public static final short CATEGORY_BOUNDS = 0x0004; //  0000000000000100 in binary
+    public static final short CATEGORY_PLAYER_BULLET = 0x0008; //  0000000000000100 in binary
 
     public static final short MASK_PLAYER = CATEGORY_ENEMY | CATEGORY_BOUNDS;
-    public static final short MASK_ENEMY = CATEGORY_PLAYER;
+    public static final short MASK_ENEMY = CATEGORY_PLAYER | CATEGORY_PLAYER_BULLET;
     public static final short MASK_BOUNDS = CATEGORY_PLAYER;
+    public static final short MASK_PLAYER_BULLET = CATEGORY_ENEMY;
 }
 

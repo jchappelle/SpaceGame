@@ -110,7 +110,6 @@ public class PhysicsSystem extends EntitySystem implements EntityListener {
 
     @Override
     public void entityAdded(Entity entity) {
-
     }
 
     @Override
