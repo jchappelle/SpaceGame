@@ -3,24 +3,31 @@ package com.jchappelle.sg.render;
 import com.badlogic.ashley.core.*;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import com.badlogic.gdx.utils.Disposable;
+import com.jchappelle.sg.Entities;
 import com.jchappelle.sg.TransformComponent;
+import com.jchappelle.sg.player.PlayerComponent;
 
 public class RenderSystem extends EntitySystem implements Disposable {
     private ImmutableArray<Entity> entities;
 
     SpriteBatch batch;
     private OrthographicCamera camera;
+    private BitmapFont font;
 
     public RenderSystem(){
         batch = new SpriteBatch();
         camera = new OrthographicCamera(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         camera.position.set(camera.viewportWidth * .5f, camera.viewportHeight * .5f, 0f);
+        font = new BitmapFont();
+        font.setColor(Color.WHITE);
     }
 
     public void addedToEngine(Engine engine) {
@@ -38,8 +45,15 @@ public class RenderSystem extends EntitySystem implements Disposable {
         for (int i = 0; i < entities.size(); ++i) {
             renderEntity(entities.get(i));
         }
+        drawScore();
         batch.end();
 
+    }
+
+    private void drawScore(){
+        Entity player = Entities.get().getPlayer();
+        PlayerComponent pc = PlayerComponent.get(player);
+        font.draw(batch, "Score: " + pc.score, 10, Gdx.graphics.getHeight() - 10);
     }
 
     private void renderEntity(Entity entity){
@@ -51,5 +65,6 @@ public class RenderSystem extends EntitySystem implements Disposable {
 
     public void dispose(){
         batch.dispose();
+        font.dispose();
     }
 }

@@ -15,15 +15,7 @@ public class ScoreSystem extends EntitySystem implements EntityListener {
         this.engine.addEntityListener(this);
     }
 
-    int count = 0;
     public void update(float deltaTime){
-        count++;
-        if(count % 120 == 0){
-            Entity player = Entities.get().getPlayer();
-            PlayerComponent pc = PlayerComponent.get(player);
-
-            System.out.println("Score is " + pc.score);
-        }
     }
 
     @Override

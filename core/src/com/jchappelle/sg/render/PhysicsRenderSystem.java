@@ -17,7 +17,7 @@ public class PhysicsRenderSystem extends EntitySystem {
     private World world;
     private Box2DDebugRenderer debugRenderer;
 
-    private boolean debug = true;
+    private boolean debug = false;
 
     public PhysicsRenderSystem(World world){
         this.world = world;
