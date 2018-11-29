@@ -11,6 +11,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.jchappelle.sg.components.TransformComponent;
 import com.jchappelle.sg.systems.damage.DamageComponent;
 import com.jchappelle.sg.systems.damage.HealthComponent;
+import com.jchappelle.sg.systems.level.XpComponent;
 import com.jchappelle.sg.systems.physics.BodyComponent;
 import com.jchappelle.sg.systems.physics.WorldComponent;
 import com.jchappelle.sg.systems.player.GunComponent;
@@ -87,6 +88,7 @@ public class Entities {
         entity.add(new HealthComponent(10));
         entity.add(new DamageComponent(10));
         entity.add(new ScoreComponent(10));
+        entity.add(new XpComponent(5));
         return entity;
     }
 

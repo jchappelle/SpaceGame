@@ -8,8 +8,10 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Disposable;
 import com.jchappelle.sg.*;
 import com.jchappelle.sg.components.InputProcessorComponent;
+import com.jchappelle.sg.systems.level.LevelComponent;
 import com.jchappelle.sg.systems.damage.DamageSystem;
 import com.jchappelle.sg.systems.AsteroidSystem;
+import com.jchappelle.sg.systems.level.LevelSystem;
 import com.jchappelle.sg.systems.physics.CollisionSystem;
 import com.jchappelle.sg.systems.physics.PhysicsSystem;
 import com.jchappelle.sg.systems.physics.WorldComponent;
@@ -37,6 +39,7 @@ class GameScreen extends ScreenAdapter {
         WorldComponent worldComponent = new WorldComponent();
         world = worldComponent.world;
         gameEntity.add(worldComponent);
+        gameEntity.add(new LevelComponent());
         InputProcessor inputProcessor = new InputMultiplexer();
         gameEntity.add(new InputProcessorComponent(inputProcessor));
         Gdx.input.setInputProcessor(inputProcessor);
@@ -54,6 +57,7 @@ class GameScreen extends ScreenAdapter {
         engine.addSystem(new DespawnSystem());
         engine.addSystem(new DamageSystem());
         engine.addSystem(new ScoreSystem());
+        engine.addSystem(new LevelSystem());
         //Should be added last to support CollisionListeners
         engine.addSystem(new CollisionSystem(world));
 

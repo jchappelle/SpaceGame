@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import com.badlogic.gdx.utils.Disposable;
 import com.jchappelle.sg.Entities;
+import com.jchappelle.sg.systems.level.LevelComponent;
 import com.jchappelle.sg.components.TransformComponent;
 import com.jchappelle.sg.systems.damage.HealthComponent;
 import com.jchappelle.sg.systems.player.PlayerComponent;
@@ -58,6 +59,9 @@ public class RenderSystem extends EntitySystem implements Disposable {
 
         HealthComponent hc = HealthComponent.get(player);
         font.draw(batch, "Health: " + hc.health, 10, Gdx.graphics.getHeight() - 30);
+
+        LevelComponent lc = LevelComponent.get(Entities.get().getGame());
+        font.draw(batch, "Level: " + lc.level, 10, Gdx.graphics.getHeight() - 50);
     }
 
     private void renderEntity(Entity entity){
