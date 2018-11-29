@@ -7,14 +7,18 @@ import com.badlogic.gdx.*;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Disposable;
 import com.jchappelle.sg.*;
-import com.jchappelle.sg.enemies.AsteroidSystem;
-import com.jchappelle.sg.physics.CollisionSystem;
-import com.jchappelle.sg.physics.PhysicsSystem;
-import com.jchappelle.sg.physics.WorldComponent;
-import com.jchappelle.sg.player.GunSystem;
-import com.jchappelle.sg.player.PlayerSystem;
-import com.jchappelle.sg.render.PhysicsRenderSystem;
-import com.jchappelle.sg.render.RenderSystem;
+import com.jchappelle.sg.components.InputProcessorComponent;
+import com.jchappelle.sg.systems.damage.DamageSystem;
+import com.jchappelle.sg.systems.AsteroidSystem;
+import com.jchappelle.sg.systems.physics.CollisionSystem;
+import com.jchappelle.sg.systems.physics.PhysicsSystem;
+import com.jchappelle.sg.systems.physics.WorldComponent;
+import com.jchappelle.sg.systems.player.GunSystem;
+import com.jchappelle.sg.systems.player.PlayerSystem;
+import com.jchappelle.sg.systems.player.ScoreSystem;
+import com.jchappelle.sg.systems.render.PhysicsRenderSystem;
+import com.jchappelle.sg.systems.render.RenderSystem;
+import com.jchappelle.sg.systems.DespawnSystem;
 
 class GameScreen extends ScreenAdapter {
 

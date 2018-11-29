@@ -1,4 +1,4 @@
-package com.jchappelle.sg.player;
+package com.jchappelle.sg.systems.player;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.ComponentMapper;

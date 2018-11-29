@@ -1,4 +1,4 @@
-package com.jchappelle.sg.physics;
+package com.jchappelle.sg.systems.physics;
 
 import com.badlogic.ashley.core.*;
 import com.badlogic.ashley.utils.ImmutableArray;
@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.Queue;
 import com.jchappelle.sg.Constants;
-import com.jchappelle.sg.TransformComponent;
+import com.jchappelle.sg.components.TransformComponent;
 
 public class PhysicsSystem extends EntitySystem implements EntityListener {
 

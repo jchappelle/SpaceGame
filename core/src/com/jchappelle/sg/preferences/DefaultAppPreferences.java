@@ -1,9 +1,9 @@
-package com.jchappelle.sg;
+package com.jchappelle.sg.preferences;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 
-public class AppPreferences {
+class DefaultAppPreferences implements AppPreferences {
     private static final String PREF_MUSIC_VOLUME = "volume";
     private static final String PREF_MUSIC_ENABLED = "music.enabled";
     private static final String PREF_SOUND_ENABLED = "sound.enabled";

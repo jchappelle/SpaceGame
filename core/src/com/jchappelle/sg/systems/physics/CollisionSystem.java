@@ -1,11 +1,10 @@
-package com.jchappelle.sg.physics;
+package com.jchappelle.sg.systems.physics;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntityListener;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.utils.Queue;
 
 import java.util.ArrayList;
 import java.util.List;

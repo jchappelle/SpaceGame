@@ -1,4 +1,4 @@
-package com.jchappelle.sg.player;
+package com.jchappelle.sg.systems.player;
 
 import com.badlogic.ashley.core.*;
 import com.badlogic.gdx.Gdx;
@@ -6,10 +6,9 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.physics.box2d.World;
 import com.jchappelle.sg.Entities;
-import com.jchappelle.sg.TransformComponent;
-import com.jchappelle.sg.physics.WorldComponent;
-import com.jchappelle.sg.player.GunComponent;
-import com.jchappelle.sg.render.SpriteComponent;
+import com.jchappelle.sg.components.TransformComponent;
+import com.jchappelle.sg.systems.physics.WorldComponent;
+import com.jchappelle.sg.systems.render.SpriteComponent;
 
 public class GunSystem extends EntitySystem {
 

@@ -1,8 +1,9 @@
-package com.jchappelle.sg;
+package com.jchappelle.sg.systems;
 
 import com.badlogic.ashley.core.*;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
+import com.jchappelle.sg.components.TransformComponent;
 
 public class DespawnSystem extends EntitySystem {
 

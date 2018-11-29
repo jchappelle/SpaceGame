@@ -1,4 +1,4 @@
-package com.jchappelle.sg.render;
+package com.jchappelle.sg.systems.render;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.ComponentMapper;

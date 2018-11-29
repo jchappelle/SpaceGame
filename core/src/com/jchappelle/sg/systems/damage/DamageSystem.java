@@ -1,9 +1,9 @@
-package com.jchappelle.sg;
+package com.jchappelle.sg.systems.damage;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
-import com.jchappelle.sg.physics.CollisionListener;
+import com.jchappelle.sg.systems.physics.CollisionListener;
 import com.badlogic.gdx.utils.*;
 
 public class DamageSystem extends EntitySystem implements CollisionListener {

@@ -1,4 +1,4 @@
-package com.jchappelle.sg.enemies;
+package com.jchappelle.sg.systems;
 
 import com.badlogic.ashley.core.*;
 import com.badlogic.gdx.Gdx;

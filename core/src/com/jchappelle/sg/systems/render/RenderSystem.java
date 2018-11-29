@@ -1,4 +1,4 @@
-package com.jchappelle.sg.render;
+package com.jchappelle.sg.systems.render;
 
 import com.badlogic.ashley.core.*;
 import com.badlogic.ashley.utils.ImmutableArray;
@@ -12,8 +12,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import com.badlogic.gdx.utils.Disposable;
 import com.jchappelle.sg.Entities;
-import com.jchappelle.sg.TransformComponent;
-import com.jchappelle.sg.player.PlayerComponent;
+import com.jchappelle.sg.components.TransformComponent;
+import com.jchappelle.sg.systems.player.PlayerComponent;
 
 public class RenderSystem extends EntitySystem implements Disposable {
     private ImmutableArray<Entity> entities;

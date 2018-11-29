@@ -1,4 +1,4 @@
-package com.jchappelle.sg.physics;
+package com.jchappelle.sg.systems.physics;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.ComponentMapper;

@@ -1,4 +1,4 @@
-package com.jchappelle.sg.player;
+package com.jchappelle.sg.systems.player;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
@@ -8,7 +8,7 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.jchappelle.sg.physics.BodyComponent;
+import com.jchappelle.sg.systems.physics.BodyComponent;
 
 public class PlayerSystem extends EntitySystem {
 

@@ -1,12 +1,14 @@
 package com.jchappelle.sg;
 
 import com.badlogic.gdx.*;
+import com.jchappelle.sg.preferences.AppPreferences;
+import com.jchappelle.sg.preferences.AppPreferencesFactory;
 import com.jchappelle.sg.screens.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class SpaceGame extends Game implements GameManager {
+class SpaceGame extends Game implements GameManager {
 
 	private static final ScreenId INITIAL_SCREEN = ScreenId.MAIN_MENU;
 
@@ -28,13 +30,15 @@ public class SpaceGame extends Game implements GameManager {
 
 	@Override
 	public void create () {
-		prefs = new AppPreferences();
+		prefs = AppPreferencesFactory.make();
 
 		changeScreen(INITIAL_SCREEN);
 	}
 
 	@Override
 	public void dispose () {
-		if (screen != null) screen.dispose();
+		if (screen != null) {
+			screen.dispose();
+		}
 	}
 }
