@@ -1,69 +1,40 @@
 package com.jchappelle.sg;
 
-import com.badlogic.ashley.core.Engine;
-import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.core.EntitySystem;
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.utils.Disposable;
-import com.jchappelle.sg.enemies.AsteroidSystem;
-import com.jchappelle.sg.physics.CollisionSystem;
-import com.jchappelle.sg.physics.PhysicsSystem;
-import com.jchappelle.sg.physics.WorldComponent;
-import com.jchappelle.sg.player.GunSystem;
-import com.jchappelle.sg.player.PlayerSystem;
-import com.jchappelle.sg.render.PhysicsRenderSystem;
-import com.jchappelle.sg.render.RenderSystem;
+import com.badlogic.gdx.*;
+import com.jchappelle.sg.screens.*;
 
-public class SpaceGame extends ApplicationAdapter {
+import java.util.HashMap;
+import java.util.Map;
 
-	private World world;
-	private Engine engine;
+public class SpaceGame extends Game implements GameManager {
 
-	@Override
-	public void create () {
+	private static final ScreenId INITIAL_SCREEN = ScreenId.MAIN_MENU;
 
-		engine = new Engine();
-		Entity gameEntity = new Entity();
-		WorldComponent worldComponent = new WorldComponent();
-		world = worldComponent.world;
-		gameEntity.add(worldComponent);
-		InputProcessor inputProcessor = new InputMultiplexer();
-		gameEntity.add(new InputProcessorComponent(inputProcessor));
-		Gdx.input.setInputProcessor(inputProcessor);
-		engine.addEntity(gameEntity);
+	private Map<ScreenId, Screen> screens = new HashMap<ScreenId, Screen>();
+	private AppPreferences prefs;
 
-		Entities.init(world, engine);
+	public void changeScreen(ScreenId screenId){
+		Screen screen = screens.get(screenId);
+		if(screen == null){
+			screen = ScreenFactory.makeScreen(screenId, this);
+			screens.put(screenId, screen);
+		}
+		setScreen(screen);
+	}
 
-		engine.addEntity(Entities.get().newShip());
-		engine.addSystem(new RenderSystem());
-		engine.addSystem(new PhysicsSystem(world));
-		engine.addSystem(new PhysicsRenderSystem(world));
-		engine.addSystem(new PlayerSystem());
-		engine.addSystem(new GunSystem());
-		engine.addSystem(new AsteroidSystem());
-		engine.addSystem(new DespawnSystem());
-		engine.addSystem(new DamageSystem());
-		engine.addSystem(new ScoreSystem());
-		//Should be added last to support CollisionListeners
-		engine.addSystem(new CollisionSystem(world));
+	public AppPreferences getPreferences(){
+		return prefs;
 	}
 
 	@Override
-	public void render () {
-		engine.update(Gdx.graphics.getDeltaTime());
+	public void create () {
+		prefs = new AppPreferences();
+
+		changeScreen(INITIAL_SCREEN);
 	}
 
 	@Override
 	public void dispose () {
-		for(EntitySystem system : engine.getSystems()){
-			if(system instanceof Disposable){
-				((Disposable)system).dispose();
-			}
-		}
-		world.dispose();
+		if (screen != null) screen.dispose();
 	}
 }
