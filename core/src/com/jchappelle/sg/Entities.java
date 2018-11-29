@@ -61,6 +61,8 @@ public class Entities {
         Entity entity = newEntity("ship.png", 0, 0, 10f, Constants.CATEGORY_PLAYER, Constants.MASK_PLAYER);
         entity.add(new PlayerComponent());
         entity.add(new GunComponent());
+        entity.add(new HealthComponent(30));
+        entity.add(new DamageComponent(100));
         return entity;
     }
 
@@ -83,7 +85,7 @@ public class Entities {
         entity.add(bc);
 
         entity.add(new HealthComponent(10));
-        entity.add(new DamageComponent(2));
+        entity.add(new DamageComponent(10));
         entity.add(new ScoreComponent(10));
         return entity;
     }

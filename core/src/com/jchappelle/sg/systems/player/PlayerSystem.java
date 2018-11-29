@@ -14,16 +14,14 @@ public class PlayerSystem extends EntitySystem {
 
     float speed = 5f;
     private Body body;
+    private Engine engine;
 
     public void addedToEngine(Engine engine) {
-        ImmutableArray<Entity> entities = engine.getEntitiesFor(Family.all(PlayerComponent.class, BodyComponent.class).get());
-        for(Entity entity : entities){
-            body = entity.getComponent(BodyComponent.class).body;
-            break;
-        }
+        this.engine = engine;
     }
 
     public void update(float deltaTime) {
+        Body body = getPlayerBody();
         boolean right = Gdx.input.isKeyPressed(Input.Keys.D);
         if(right){
             body.applyForceToCenter(speed, 0, true);
@@ -48,6 +46,16 @@ public class PlayerSystem extends EntitySystem {
         if(arrow_left){
             body.applyTorque(0.1f,true);
         }
+    }
 
+    private Body getPlayerBody(){
+        if (body == null) {
+            ImmutableArray<Entity> entities = engine.getEntitiesFor(Family.all(PlayerComponent.class, BodyComponent.class).get());
+            for(Entity entity : entities){
+                body = entity.getComponent(BodyComponent.class).body;
+                break;
+            }
+        }
+        return body;
     }
 }

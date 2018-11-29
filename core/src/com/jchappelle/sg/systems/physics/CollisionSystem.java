@@ -29,7 +29,6 @@ public class CollisionSystem extends EntitySystem implements ContactListener, En
         this.world = world;
 
         this.world.setContactListener(this);
-
     }
 
     public void addedToEngine(Engine engine){
