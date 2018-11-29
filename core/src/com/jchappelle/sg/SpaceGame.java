@@ -1,6 +1,8 @@
 package com.jchappelle.sg;
 
 import com.badlogic.gdx.*;
+import com.jchappelle.sg.crashhandler.CrashHandler;
+import com.jchappelle.sg.crashhandler.CrashHandlerFactory;
 import com.jchappelle.sg.preferences.AppPreferences;
 import com.jchappelle.sg.preferences.AppPreferencesFactory;
 import com.jchappelle.sg.screens.*;
@@ -14,6 +16,7 @@ class SpaceGame extends Game implements GameManager {
 
 	private Map<ScreenId, Screen> screens = new HashMap<ScreenId, Screen>();
 	private AppPreferences prefs;
+	private CrashHandler crashHandler;
 
 	public void changeScreen(ScreenId screenId){
 		Screen screen = screens.get(screenId);
@@ -31,9 +34,21 @@ class SpaceGame extends Game implements GameManager {
 	@Override
 	public void create () {
 		prefs = AppPreferencesFactory.make();
+		crashHandler = CrashHandlerFactory.make(this);
 
 		changeScreen(INITIAL_SCREEN);
 	}
+
+	@Override
+	public void render () {
+		try{
+			if (screen != null) screen.render(Gdx.graphics.getDeltaTime());
+		}
+		catch(RuntimeException e){
+			crashHandler.handleCrash(e);
+		}
+	}
+
 
 	@Override
 	public void dispose () {
