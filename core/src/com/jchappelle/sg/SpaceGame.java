@@ -1,6 +1,7 @@
 package com.jchappelle.sg;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.audio.Sound;
 import com.jchappelle.sg.crashhandler.CrashHandler;
 import com.jchappelle.sg.crashhandler.CrashHandlerFactory;
 import com.jchappelle.sg.preferences.AppPreferences;
@@ -17,6 +18,7 @@ class SpaceGame extends Game implements GameManager {
 	private Map<ScreenId, Screen> screens = new HashMap<ScreenId, Screen>();
 	private AppPreferences prefs;
 	private CrashHandler crashHandler;
+	private Map<SoundId, Sound> sounds = new HashMap<SoundId, Sound>();
 
 	public void changeScreen(ScreenId screenId){
 		Screen screen = screens.get(screenId);
@@ -32,10 +34,23 @@ class SpaceGame extends Game implements GameManager {
 	}
 
 	@Override
+	public Sound getSound(SoundId soundId) {
+		return sounds.get(soundId);
+	}
+
+	@Override
+	public void playSound(SoundId soundId) {
+		Sound sound = getSound(soundId);
+		if(sound != null){
+			sound.play();
+		}
+	}
+
+	@Override
 	public void create () {
 		prefs = AppPreferencesFactory.make();
 		crashHandler = CrashHandlerFactory.make(this);
-
+		loadSounds();
 		changeScreen(INITIAL_SCREEN);
 	}
 
@@ -49,11 +64,24 @@ class SpaceGame extends Game implements GameManager {
 		}
 	}
 
+	private void loadSounds(){
+		for(SoundId soundId : SoundId.values()){
+			loadSound(soundId);
+		}
+	}
+
+	private void loadSound(SoundId soundId){
+		sounds.put(soundId, Gdx.audio.newSound(Gdx.files.internal(soundId.getPath())));
+	}
 
 	@Override
 	public void dispose () {
 		if (screen != null) {
 			screen.dispose();
 		}
+		for(Sound sound : sounds.values()){
+			sound.dispose();
+		}
+		sounds.clear();
 	}
 }

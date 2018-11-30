@@ -27,7 +27,6 @@ public class GunSystem extends EntitySystem {
             Entity player = Entities.get().getPlayer();
             GunComponent gun = GunComponent.get(player);
             if(canFire(gun)){
-
                 fire(player);
                 gun.lastBulletShot = System.currentTimeMillis();
             }

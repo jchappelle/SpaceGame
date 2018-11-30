@@ -2,6 +2,7 @@ package com.jchappelle.sg.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -16,6 +17,7 @@ class MainMenuScreen extends ScreenAdapter {
 
     private Stage stage;
     private GameManager gameMgr;
+    private Music music;
 
     public MainMenuScreen(GameManager screenMgr){
         this.gameMgr = screenMgr;
@@ -25,6 +27,10 @@ class MainMenuScreen extends ScreenAdapter {
 
     @Override
     public void show(){
+        music = Gdx.audio.newMusic(Gdx.files.internal("music/theme1.wav"));
+        music.play();
+        music.setLooping(true);
+
         Gdx.input.setInputProcessor(stage);
         stage.clear();
 
@@ -79,6 +85,13 @@ class MainMenuScreen extends ScreenAdapter {
     @Override
     public void dispose () {
         stage.dispose();
+        music.dispose();
     }
 
+    @Override
+    public void hide(){
+        super.hide();
+
+        music.stop();
+    }
 }

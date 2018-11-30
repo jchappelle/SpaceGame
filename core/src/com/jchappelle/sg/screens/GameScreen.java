@@ -8,6 +8,8 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Disposable;
 import com.jchappelle.sg.*;
 import com.jchappelle.sg.components.InputProcessorComponent;
+import com.jchappelle.sg.systems.MusicSystem;
+import com.jchappelle.sg.systems.SoundSystem;
 import com.jchappelle.sg.systems.level.LevelComponent;
 import com.jchappelle.sg.systems.damage.DamageSystem;
 import com.jchappelle.sg.systems.AsteroidSystem;
@@ -28,7 +30,7 @@ class GameScreen extends ScreenAdapter {
     private Engine engine;
     private GameManager gameManager;
 
-    public GameScreen(GameManager gameManager){
+    GameScreen(GameManager gameManager){
         this.gameManager = gameManager;
     }
 
@@ -47,7 +49,8 @@ class GameScreen extends ScreenAdapter {
 
         Entities.init(world, engine);
 
-
+        engine.addSystem(new MusicSystem());
+        engine.addSystem(new SoundSystem(gameManager));
         engine.addSystem(new RenderSystem());
         engine.addSystem(new PhysicsSystem(world));
         engine.addSystem(new PhysicsRenderSystem(world));

@@ -75,6 +75,7 @@ public class Entities {
 
         entity.add(new HealthComponent(1));
         entity.add(new DamageComponent(100));
+        entity.add(new SpawnComponent(SoundId.BULLET));
         return entity;
     }
 
@@ -89,6 +90,7 @@ public class Entities {
         entity.add(new DamageComponent(10));
         entity.add(new ScoreComponent(10));
         entity.add(new XpComponent(5));
+        entity.add(new DeathComponent(SoundId.ASTEROID_EXPLOSION));
         return entity;
     }
 
