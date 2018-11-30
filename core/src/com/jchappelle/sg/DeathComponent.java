@@ -11,8 +11,15 @@ public class DeathComponent implements Component {
     }
 
     public SoundId soundEffect;
+    public boolean explode;
 
     public DeathComponent(SoundId soundEffect){
         this.soundEffect = soundEffect;
     }
+
+    public DeathComponent(SoundId soundEffect, boolean explode){
+        this.soundEffect = soundEffect;
+        this.explode = explode;
+    }
+
 }

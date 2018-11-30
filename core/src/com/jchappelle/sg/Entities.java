@@ -4,8 +4,11 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.jchappelle.sg.components.TransformComponent;
@@ -90,7 +93,40 @@ public class Entities {
         entity.add(new DamageComponent(10));
         entity.add(new ScoreComponent(10));
         entity.add(new XpComponent(5));
-        entity.add(new DeathComponent(SoundId.ASTEROID_EXPLOSION));
+        entity.add(new DeathComponent(SoundId.ASTEROID_EXPLOSION, true));
+        return entity;
+    }
+
+    //TODO: Move to asset manager
+    private static Texture explosionSheet = new Texture(Gdx.files.internal("explosion.png"));
+
+    public Entity newExplosion(float x, float y ){
+        Entity entity = new Entity();
+
+        int FRAME_COLS = 3;
+        int FRAME_ROWS = 3;
+        // Use the split utility method to create a 2D array of TextureRegions. This is
+        // possible because this sprite sheet contains frames of equal size and they are
+        // all aligned.
+        TextureRegion[][] tmp = TextureRegion.split(explosionSheet,
+                explosionSheet.getWidth() / FRAME_COLS,
+                explosionSheet.getHeight() / FRAME_ROWS);
+
+        // Place the regions into a 1D array in the correct order, starting from the top
+        // left, going across first. The Animation constructor requires a 1D array.
+        TextureRegion[] frames = new TextureRegion[FRAME_COLS * FRAME_ROWS];
+        int index = 0;
+        for (int i = 0; i < FRAME_ROWS; i++) {
+            for (int j = 0; j < FRAME_COLS; j++) {
+                frames[index++] = tmp[i][j];
+            }
+        }
+
+        float duration = 1/15f;
+        entity.add(new AnimationComponent(new Animation<TextureRegion>(duration, frames)));
+        entity.add(new DespawnComponent(duration * 4));
+        entity.add(new TransformComponent(x, y, 0, 32, 32));
+        entity.add(new SpawnComponent(SoundId.ASTEROID_EXPLOSION));
         return entity;
     }
 
