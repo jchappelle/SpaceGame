@@ -2,7 +2,6 @@ package com.jchappelle.sg.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -12,8 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.jchappelle.sg.GameManager;
-import com.jchappelle.sg.MusicId;
-import com.sun.java.swing.plaf.motif.MotifRadioButtonMenuItemUI;
+import com.jchappelle.sg.audio.MusicId;
 
 class MainMenuScreen extends ScreenAdapter {
 
@@ -28,7 +26,7 @@ class MainMenuScreen extends ScreenAdapter {
 
     @Override
     public void show(){
-        gameMgr.playMusic(MusicId.Theme1);
+        gameMgr.getAudioManager().playMusic(MusicId.Theme1);
         Gdx.input.setInputProcessor(stage);
         stage.clear();
 

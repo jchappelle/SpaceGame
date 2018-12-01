@@ -26,7 +26,7 @@ public class SoundSystem extends EntitySystem implements EntityListener {
     public void entityAdded(Entity entity) {
         SpawnComponent spawnComponent = SpawnComponent.get(entity);
         if(spawnComponent != null && spawnComponent.soundEffect != null){
-            gameManager.playSound(spawnComponent.soundEffect);
+            gameManager.getAudioManager().playSound(spawnComponent.soundEffect);
         }
     }
 
@@ -34,7 +34,7 @@ public class SoundSystem extends EntitySystem implements EntityListener {
     public void entityRemoved(Entity entity) {
         DeathComponent deathComponent = DeathComponent.get(entity);
         if(deathComponent != null && deathComponent.soundEffect != null){
-            gameManager.playSound(deathComponent.soundEffect);
+            gameManager.getAudioManager().playSound(deathComponent.soundEffect);
         }
     }
 }

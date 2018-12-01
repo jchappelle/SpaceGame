@@ -1,4 +1,4 @@
-package com.jchappelle.sg;
+package com.jchappelle.sg.audio;
 
 public enum MusicId {
 

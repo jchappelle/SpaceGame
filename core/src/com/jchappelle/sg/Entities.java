@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
+import com.jchappelle.sg.audio.SoundId;
 import com.jchappelle.sg.components.DespawnComponent;
 import com.jchappelle.sg.components.SpawnComponent;
 import com.jchappelle.sg.components.TransformComponent;

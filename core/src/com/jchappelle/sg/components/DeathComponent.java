@@ -3,7 +3,7 @@ package com.jchappelle.sg.components;
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
-import com.jchappelle.sg.SoundId;
+import com.jchappelle.sg.audio.SoundId;
 
 public class DeathComponent implements Component {
     private static ComponentMapper<DeathComponent> mapper = ComponentMapper.getFor(DeathComponent.class);
