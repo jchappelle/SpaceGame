@@ -9,15 +9,12 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.*;
 
 import com.badlogic.gdx.utils.Disposable;
-import com.jchappelle.sg.AnimationComponent;
 import com.jchappelle.sg.Entities;
 import com.jchappelle.sg.GameManager;
 import com.jchappelle.sg.systems.level.LevelComponent;
 import com.jchappelle.sg.components.TransformComponent;
 import com.jchappelle.sg.systems.damage.HealthComponent;
 import com.jchappelle.sg.systems.player.PlayerComponent;
-
-import javax.xml.crypto.dsig.Transform;
 
 public class RenderSystem extends EntitySystem implements Disposable {
     private ImmutableArray<Entity> entities;

@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.jchappelle.sg.Constants;
-import com.jchappelle.sg.DeathComponent;
+import com.jchappelle.sg.components.DeathComponent;
 import com.jchappelle.sg.SoundId;
 import com.jchappelle.sg.components.TransformComponent;
 import com.jchappelle.sg.systems.damage.DamageComponent;

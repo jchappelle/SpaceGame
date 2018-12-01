@@ -3,8 +3,8 @@ package com.jchappelle.sg.systems;
 import com.badlogic.ashley.core.*;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
-import com.jchappelle.sg.DeathComponent;
-import com.jchappelle.sg.DespawnComponent;
+import com.jchappelle.sg.components.DeathComponent;
+import com.jchappelle.sg.components.DespawnComponent;
 import com.jchappelle.sg.Entities;
 import com.jchappelle.sg.components.TransformComponent;
 

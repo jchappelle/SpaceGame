@@ -11,16 +11,17 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
+import com.jchappelle.sg.components.DespawnComponent;
+import com.jchappelle.sg.components.SpawnComponent;
 import com.jchappelle.sg.components.TransformComponent;
 import com.jchappelle.sg.systems.damage.DamageComponent;
 import com.jchappelle.sg.systems.damage.HealthComponent;
-import com.jchappelle.sg.systems.level.XpComponent;
 import com.jchappelle.sg.systems.physics.BodyComponent;
 import com.jchappelle.sg.systems.physics.InitialForceComponent;
 import com.jchappelle.sg.systems.physics.WorldComponent;
 import com.jchappelle.sg.systems.player.GunComponent;
 import com.jchappelle.sg.systems.player.PlayerComponent;
-import com.jchappelle.sg.systems.player.ScoreComponent;
+import com.jchappelle.sg.systems.render.AnimationComponent;
 import com.jchappelle.sg.systems.render.SpriteComponent;
 
 public class Entities {

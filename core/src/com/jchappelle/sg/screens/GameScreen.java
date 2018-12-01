@@ -49,17 +49,17 @@ class GameScreen extends ScreenAdapter {
 
         Entities.init(world, engine);
 
-        engine.addSystem(new MusicSystem());
+        engine.addSystem(new MusicSystem(gameManager));
         engine.addSystem(new SoundSystem(gameManager));
         engine.addSystem(new RenderSystem(gameManager));
         engine.addSystem(new PhysicsSystem(world));
         engine.addSystem(new PhysicsRenderSystem(world));
         engine.addSystem(new PlayerSystem());
-        engine.addSystem(new GunSystem());
+        engine.addSystem(new GunSystem(gameManager));
         engine.addSystem(new AsteroidSystem(gameManager));
         engine.addSystem(new DespawnSystem());
         engine.addSystem(new DamageSystem());
-        engine.addSystem(new ScoreSystem());
+        engine.addSystem(new ScoreSystem(gameManager));
         engine.addSystem(new LevelSystem());
         //Should be added last to support CollisionListeners
         engine.addSystem(new CollisionSystem(world));

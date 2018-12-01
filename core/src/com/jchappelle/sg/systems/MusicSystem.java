@@ -2,28 +2,25 @@ package com.jchappelle.sg.systems;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.EntitySystem;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.utils.Disposable;
+import com.jchappelle.sg.GameManager;
+import com.jchappelle.sg.MusicId;
 
-public class MusicSystem extends EntitySystem implements Disposable {
+public class MusicSystem extends EntitySystem {
 
     private Engine engine;
-    private Music music;
+    private GameManager gameManager;
+
+    public MusicSystem(GameManager gameManager){
+        this.gameManager = gameManager;
+    }
 
     public void addedToEngine(Engine engine){
         this.engine = engine;
 
-        music = Gdx.audio.newMusic(Gdx.files.internal("music/theme1.wav"));
-        music.play();
-        music.setLooping(true);
+        gameManager.playMusic(MusicId.Theme1);
     }
 
     public void update(float deltaTime){
 
-    }
-
-    public void dispose(){
-        music.dispose();
     }
 }

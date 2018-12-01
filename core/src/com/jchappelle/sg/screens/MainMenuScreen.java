@@ -12,12 +12,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.jchappelle.sg.GameManager;
+import com.jchappelle.sg.MusicId;
+import com.sun.java.swing.plaf.motif.MotifRadioButtonMenuItemUI;
 
 class MainMenuScreen extends ScreenAdapter {
 
     private Stage stage;
     private GameManager gameMgr;
-    private Music music;
 
     public MainMenuScreen(GameManager screenMgr){
         this.gameMgr = screenMgr;
@@ -27,10 +28,7 @@ class MainMenuScreen extends ScreenAdapter {
 
     @Override
     public void show(){
-        music = Gdx.audio.newMusic(Gdx.files.internal("music/theme1.wav"));
-        music.play();
-        music.setLooping(true);
-
+        gameMgr.playMusic(MusicId.Theme1);
         Gdx.input.setInputProcessor(stage);
         stage.clear();
 
@@ -85,13 +83,10 @@ class MainMenuScreen extends ScreenAdapter {
     @Override
     public void dispose () {
         stage.dispose();
-        music.dispose();
     }
 
     @Override
     public void hide(){
         super.hide();
-
-        music.stop();
     }
 }

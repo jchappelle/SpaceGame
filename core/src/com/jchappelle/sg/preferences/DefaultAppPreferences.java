@@ -3,12 +3,16 @@ package com.jchappelle.sg.preferences;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 
+import java.util.ArrayList;
+import java.util.List;
+
 class DefaultAppPreferences implements AppPreferences {
     private static final String PREF_MUSIC_VOLUME = "volume";
     private static final String PREF_MUSIC_ENABLED = "music.enabled";
     private static final String PREF_SOUND_ENABLED = "sound.enabled";
     private static final String PREF_SOUND_VOL = "sound";
     private static final String PREFS_NAME = "b2dtut";
+    private List<AppPreferencesListener> listeners = new ArrayList<AppPreferencesListener>();
 
     protected Preferences getPrefs() {
         return Gdx.app.getPreferences(PREFS_NAME);
@@ -30,6 +34,7 @@ class DefaultAppPreferences implements AppPreferences {
     public void setMusicEnabled(boolean musicEnabled) {
         getPrefs().putBoolean(PREF_MUSIC_ENABLED, musicEnabled);
         getPrefs().flush();
+        fireOnPreferencesChanged();
     }
 
     public float getMusicVolume() {
@@ -48,5 +53,15 @@ class DefaultAppPreferences implements AppPreferences {
     public void setSoundVolume(float volume) {
         getPrefs().putFloat(PREF_SOUND_VOL, volume);
         getPrefs().flush();
+    }
+
+    public void addListener(AppPreferencesListener listener){
+        listeners.add(listener);
+    }
+
+    private void fireOnPreferencesChanged(){
+        for(AppPreferencesListener l : listeners){
+            l.onPreferencesChanged(this);
+        }
     }
 }

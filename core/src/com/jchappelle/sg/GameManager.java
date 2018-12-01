@@ -6,11 +6,9 @@ import com.jchappelle.sg.entities.EntityFactory;
 import com.jchappelle.sg.preferences.AppPreferences;
 import com.jchappelle.sg.screens.ScreenId;
 
-public interface GameManager {
+public interface GameManager extends PlayerProvider{
 
     void setPlayer(Entity entity);
-
-    Entity getPlayer();
 
     void changeScreen(ScreenId screen);
 
@@ -19,6 +17,8 @@ public interface GameManager {
     Sound getSound(SoundId soundId);
 
     void playSound(SoundId soundId);
+
+    void playMusic(MusicId musicId);
 
     EntityFactory getEntityFactory();
 

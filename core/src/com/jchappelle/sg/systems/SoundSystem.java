@@ -4,9 +4,9 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntityListener;
 import com.badlogic.ashley.core.EntitySystem;
-import com.jchappelle.sg.DeathComponent;
+import com.jchappelle.sg.components.DeathComponent;
 import com.jchappelle.sg.GameManager;
-import com.jchappelle.sg.SpawnComponent;
+import com.jchappelle.sg.components.SpawnComponent;
 
 public class SoundSystem extends EntitySystem implements EntityListener {
 

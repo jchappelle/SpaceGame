@@ -16,4 +16,6 @@ public interface AppPreferences {
     float getSoundVolume();
 
     void setSoundVolume(float volume);
+
+    void addListener(AppPreferencesListener listener);
 }

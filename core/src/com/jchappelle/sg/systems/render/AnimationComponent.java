@@ -1,10 +1,8 @@
-package com.jchappelle.sg;
+package com.jchappelle.sg.systems.render;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 

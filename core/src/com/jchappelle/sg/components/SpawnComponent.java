@@ -1,8 +1,9 @@
-package com.jchappelle.sg;
+package com.jchappelle.sg.components;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
+import com.jchappelle.sg.SoundId;
 
 public class SpawnComponent implements Component {
     private static ComponentMapper<SpawnComponent> mapper = ComponentMapper.getFor(SpawnComponent.class);

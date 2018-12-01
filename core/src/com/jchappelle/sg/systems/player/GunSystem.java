@@ -5,6 +5,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.physics.box2d.World;
 import com.jchappelle.sg.Entities;
+import com.jchappelle.sg.GameManager;
+import com.jchappelle.sg.components.SpawnSourceComponent;
 import com.jchappelle.sg.components.TransformComponent;
 import com.jchappelle.sg.systems.physics.WorldComponent;
 
@@ -13,6 +15,12 @@ public class GunSystem extends EntitySystem {
     private World world;
 
     private Engine engine;
+
+    private GameManager gameManager;
+
+    public GunSystem(GameManager gameManager){
+        this.gameManager = gameManager;
+    }
 
     public void addedToEngine(Engine engine) {
         this.engine = engine;
@@ -24,7 +32,7 @@ public class GunSystem extends EntitySystem {
     public void update(float deltaTime) {
         boolean firing = Gdx.input.isKeyPressed(Input.Keys.SPACE);
         if(firing){
-            Entity player = Entities.get().getPlayer();
+            Entity player = gameManager.getPlayer();
             GunComponent gun = GunComponent.get(player);
             if(canFire(gun)){
                 fire(player);
@@ -37,6 +45,9 @@ public class GunSystem extends EntitySystem {
         TransformComponent tc = TransformComponent.get(player);
         float x = tc.x + tc.width/2 - 4;
         float y = tc.y + tc.height/2 + 16;
+        Entity entity = Entities.get().newBullet(x, y);
+        entity.add(new SpawnSourceComponent(gameManager.getPlayer()));
+
         engine.addEntity(Entities.get().newBullet(x, y));
     }
 

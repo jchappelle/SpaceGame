@@ -47,6 +47,7 @@ public class DamageSystem extends EntitySystem implements CollisionListener {
             }
             if(hc.health == 0){
                 hc.deathSource = entityB;
+
                 engine.removeEntity(entityA);
             }
             return true;
