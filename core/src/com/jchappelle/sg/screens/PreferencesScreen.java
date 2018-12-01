@@ -26,12 +26,13 @@ class PreferencesScreen extends ScreenAdapter {
         this.gameMgr = screenMgr;
 
         stage = new Stage(new ScreenViewport());
-        Gdx.input.setInputProcessor(stage);
+
     }
 
     @Override
     public void show(){
         stage.clear();
+        Gdx.input.setInputProcessor(stage);
 
         Table table = new Table();
         table.setFillParent(true);
@@ -78,7 +79,7 @@ class PreferencesScreen extends ScreenAdapter {
             }
         });
 
-        final CheckBox soundEffectsCheckbox = new CheckBox("Sound Effect", skin);
+        final CheckBox soundEffectsCheckbox = new CheckBox(null, skin);
         soundEffectsCheckbox.setChecked( gameMgr.getPreferences().isSoundEffectsEnabled() );
         soundEffectsCheckbox.addListener( new EventListener() {
             @Override
@@ -102,13 +103,13 @@ class PreferencesScreen extends ScreenAdapter {
         table.add(volumeMusicSlider);
         table.row().pad(10, 0, 0, 10);
         table.add(musicOnOffLabel).left();
-        table.add(musicCheckbox);
+        table.add(musicCheckbox).left();
         table.row().pad(10, 0, 0, 10);
         table.add(volumeSoundLabel).left();
         table.add(soundMusicSlider);
         table.row().pad(10, 0, 0, 10);
         table.add(soundOnOffLabel).left();
-        table.add(soundEffectsCheckbox);
+        table.add(soundEffectsCheckbox).left();
         table.row().pad(10, 0, 0, 10);
         table.add(backButton);
 
