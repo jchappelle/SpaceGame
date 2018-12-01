@@ -8,6 +8,7 @@ import com.jchappelle.sg.crashhandler.CrashHandler;
 import com.jchappelle.sg.crashhandler.CrashHandlerFactory;
 import com.jchappelle.sg.entities.EntityFactory;
 import com.jchappelle.sg.entities.EntityFactoryProvider;
+import com.jchappelle.sg.persistence.GameDB;
 import com.jchappelle.sg.preferences.AppPreferences;
 import com.jchappelle.sg.preferences.AppPreferencesFactory;
 import com.jchappelle.sg.screens.*;
@@ -33,6 +34,7 @@ class SpaceGame extends Game implements GameManager {
 		prefs = AppPreferencesFactory.make();
 		crashHandler = CrashHandlerFactory.make(this);
 		audioManager = AudioManagerFactory.make(this);
+		new GameDB(this).load();
 		changeScreen(INITIAL_SCREEN);
 	}
 
@@ -98,6 +100,7 @@ class SpaceGame extends Game implements GameManager {
 
 	@Override
 	public void dispose () {
+		new GameDB(this).save();
 		if (screen != null) {
 			screen.dispose();
 		}
