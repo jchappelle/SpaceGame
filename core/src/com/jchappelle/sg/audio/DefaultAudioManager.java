@@ -3,6 +3,7 @@ package com.jchappelle.sg.audio;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.utils.Json;
 import com.jchappelle.sg.preferences.AppPreferences;
 import com.jchappelle.sg.preferences.AppPreferencesListener;
 
@@ -43,7 +44,7 @@ class DefaultAudioManager implements AudioManager, AppPreferencesListener {
         if(prefs.isMusicEnabled()){
             Music musicObj = music.get(musicId);
             if(musicObj != null){
-                if(currentMusic != null){
+                if(currentMusic != null && currentMusic != musicId){
                     music.get(currentMusic).stop();
                 }
 
