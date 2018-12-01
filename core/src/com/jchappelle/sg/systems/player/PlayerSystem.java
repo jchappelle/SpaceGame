@@ -8,6 +8,8 @@ import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.jchappelle.sg.GameManager;
+import com.jchappelle.sg.screens.ScreenId;
 import com.jchappelle.sg.systems.physics.BodyComponent;
 
 public class PlayerSystem extends EntitySystem {
@@ -15,6 +17,11 @@ public class PlayerSystem extends EntitySystem {
     float speed = 5f;
     private Body body;
     private Engine engine;
+    private GameManager gameManager;
+
+    public PlayerSystem(GameManager gameManager){
+        this.gameManager = gameManager;
+    }
 
     public void addedToEngine(Engine engine) {
         this.engine = engine;
@@ -46,6 +53,11 @@ public class PlayerSystem extends EntitySystem {
         if(arrow_left){
             body.applyTorque(0.1f,true);
         }
+        boolean escape = Gdx.input.isKeyPressed(Input.Keys.ESCAPE);
+        if(escape){
+            gameManager.changeScreen(ScreenId.PREFERENCES);
+        }
+
     }
 
     private Body getPlayerBody(){

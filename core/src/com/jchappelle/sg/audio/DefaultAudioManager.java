@@ -30,9 +30,11 @@ class DefaultAudioManager implements AudioManager, AppPreferencesListener {
 
     @Override
     public void playSound(SoundId soundId) {
-        Sound sound = getSound(soundId);
-        if(sound != null){
-            sound.play();
+        if(prefs.isSoundEffectsEnabled()){
+            Sound sound = getSound(soundId);
+            if(sound != null){
+                sound.play(prefs.getSoundVolume());
+            }
         }
     }
 
@@ -46,16 +48,19 @@ class DefaultAudioManager implements AudioManager, AppPreferencesListener {
                 }
 
                 musicObj.setLooping(true);
+                musicObj.setVolume(prefs.getMusicVolume());
                 musicObj.play();
                 currentMusic = musicId;
             }
         }
+        currentMusic = musicId;
     }
 
     @Override
     public void onPreferencesChanged(AppPreferences prefs) {
         if(currentMusic != null){
             Music musicObj = music.get(currentMusic);
+            musicObj.setVolume(prefs.getMusicVolume());
             if(prefs.isMusicEnabled() && !musicObj.isPlaying()){
                 musicObj.play();
                 musicObj.setLooping(true);

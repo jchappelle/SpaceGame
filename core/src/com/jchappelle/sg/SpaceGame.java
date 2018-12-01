@@ -25,6 +25,8 @@ class SpaceGame extends Game implements GameManager {
 
 	private Entity player;
 	private AudioManager audioManager;
+	private ScreenId currentScreen;
+	private ScreenId lastScreen;
 
 	@Override
 	public void create () {
@@ -45,12 +47,26 @@ class SpaceGame extends Game implements GameManager {
 	}
 
 	@Override
+	public boolean changeToPreviousScreen(){
+		if (lastScreen == null) {
+			return false;
+		}
+		else{
+			changeScreen(lastScreen);
+			return true;
+		}
+	}
+
+	@Override
 	public void changeScreen(ScreenId screenId){
 		Screen screen = screens.get(screenId);
 		if(screen == null){
 			screen = ScreenFactory.makeScreen(screenId, this);
 			screens.put(screenId, screen);
 		}
+		lastScreen = currentScreen;
+		currentScreen = screenId;
+
 		setScreen(screen);
 	}
 

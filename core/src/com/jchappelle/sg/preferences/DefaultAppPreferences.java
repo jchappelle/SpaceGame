@@ -25,6 +25,7 @@ class DefaultAppPreferences implements AppPreferences {
     public void setSoundEffectsEnabled(boolean soundEffectsEnabled) {
         getPrefs().putBoolean(PREF_SOUND_ENABLED, soundEffectsEnabled);
         getPrefs().flush();
+        fireOnPreferencesChanged();
     }
 
     public boolean isMusicEnabled() {
@@ -44,6 +45,7 @@ class DefaultAppPreferences implements AppPreferences {
     public void setMusicVolume(float volume) {
         getPrefs().putFloat(PREF_MUSIC_VOLUME, volume);
         getPrefs().flush();
+        fireOnPreferencesChanged();
     }
 
     public float getSoundVolume() {
@@ -53,6 +55,7 @@ class DefaultAppPreferences implements AppPreferences {
     public void setSoundVolume(float volume) {
         getPrefs().putFloat(PREF_SOUND_VOL, volume);
         getPrefs().flush();
+        fireOnPreferencesChanged();
     }
 
     public void addListener(AppPreferencesListener listener){

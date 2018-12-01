@@ -61,16 +61,33 @@ class PreferencesScreen extends ScreenAdapter {
             }
         });
         final Slider soundMusicSlider = new Slider(0, 1, 0.05f, false, skin);
+        soundMusicSlider.setValue(gameMgr.getPreferences().getSoundVolume());
+        soundMusicSlider.addListener( new EventListener() {
+            @Override
+            public boolean handle(Event event) {
+                gameMgr.getPreferences().setSoundVolume( soundMusicSlider.getValue() );
+                return false;
+            }
+        });
 
         final TextButton backButton = new TextButton("Back", skin, "small");
         backButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                gameMgr.changeScreen(ScreenId.MAIN_MENU);
+                gameMgr.changeToPreviousScreen();
             }
         });
 
         final CheckBox soundEffectsCheckbox = new CheckBox("Sound Effect", skin);
+        soundEffectsCheckbox.setChecked( gameMgr.getPreferences().isSoundEffectsEnabled() );
+        soundEffectsCheckbox.addListener( new EventListener() {
+            @Override
+            public boolean handle(Event event) {
+                boolean enabled = soundEffectsCheckbox.isChecked();
+                gameMgr.getPreferences().setSoundEffectsEnabled( enabled );
+                return false;
+            }
+        });
 
         //add buttons to table
         titleLabel = new Label( "Preferences", skin );

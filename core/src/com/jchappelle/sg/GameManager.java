@@ -10,6 +10,8 @@ public interface GameManager extends PlayerProvider {
 
     void setPlayer(Entity entity);
 
+    boolean changeToPreviousScreen();
+
     void changeScreen(ScreenId screen);
 
     AppPreferences getPreferences();

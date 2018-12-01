@@ -32,10 +32,6 @@ class GameScreen extends ScreenAdapter {
 
     GameScreen(GameManager gameManager){
         this.gameManager = gameManager;
-    }
-
-    @Override
-    public void show(){
         engine = new Engine();
         Entity gameEntity = new Entity();
         WorldComponent worldComponent = new WorldComponent();
@@ -54,7 +50,7 @@ class GameScreen extends ScreenAdapter {
         engine.addSystem(new RenderSystem(gameManager));
         engine.addSystem(new PhysicsSystem(world));
         engine.addSystem(new PhysicsRenderSystem(world));
-        engine.addSystem(new PlayerSystem());
+        engine.addSystem(new PlayerSystem(gameManager));
         engine.addSystem(new GunSystem(gameManager));
         engine.addSystem(new AsteroidSystem(gameManager));
         engine.addSystem(new DespawnSystem());
@@ -67,6 +63,7 @@ class GameScreen extends ScreenAdapter {
         Entity player = Entities.get().newShip();
         gameManager.setPlayer(player);
         engine.addEntity(player);
+
     }
 
     @Override
