@@ -51,12 +51,12 @@ class GameScreen extends ScreenAdapter {
 
         engine.addSystem(new MusicSystem());
         engine.addSystem(new SoundSystem(gameManager));
-        engine.addSystem(new RenderSystem());
+        engine.addSystem(new RenderSystem(gameManager));
         engine.addSystem(new PhysicsSystem(world));
         engine.addSystem(new PhysicsRenderSystem(world));
         engine.addSystem(new PlayerSystem());
         engine.addSystem(new GunSystem());
-        engine.addSystem(new AsteroidSystem());
+        engine.addSystem(new AsteroidSystem(gameManager));
         engine.addSystem(new DespawnSystem());
         engine.addSystem(new DamageSystem());
         engine.addSystem(new ScoreSystem());
@@ -64,7 +64,9 @@ class GameScreen extends ScreenAdapter {
         //Should be added last to support CollisionListeners
         engine.addSystem(new CollisionSystem(world));
 
-        engine.addEntity(Entities.get().newShip());
+        Entity player = Entities.get().newShip();
+        gameManager.setPlayer(player);
+        engine.addEntity(player);
     }
 
     @Override

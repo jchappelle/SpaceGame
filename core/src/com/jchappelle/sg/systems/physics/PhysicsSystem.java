@@ -110,6 +110,24 @@ public class PhysicsSystem extends EntitySystem implements EntityListener {
 
     @Override
     public void entityAdded(Entity entity) {
+        BodyComponent bc = BodyComponent.get(entity);
+        if(bc != null){
+            if(needsInitialization(bc)){
+                TransformComponent tc = TransformComponent.get(entity);
+                bc.setPosition(tc.x, tc.y);
+                bc.body = world.createBody(bc.bodyDef);
+                bc.body.createFixture(bc.fixtureDef);
+                bc.fixtureDef = null;
+                bc.bodyDef = null;
+                bc.shape.dispose();
+            }
+
+            InitialForceComponent ifc = InitialForceComponent.get(entity);
+            if(ifc != null){
+                bc.body.applyForceToCenter(ifc.force, true);
+            }
+        }
+
     }
 
     @Override
@@ -118,5 +136,9 @@ public class PhysicsSystem extends EntitySystem implements EntityListener {
         if(bc != null){
             queuedForRemoval.addFirst(bc.body);
         }
+    }
+
+    private boolean needsInitialization(BodyComponent bc){
+        return bc.body == null;
     }
 }

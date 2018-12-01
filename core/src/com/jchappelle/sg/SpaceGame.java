@@ -1,9 +1,12 @@
 package com.jchappelle.sg;
 
+import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.audio.Sound;
 import com.jchappelle.sg.crashhandler.CrashHandler;
 import com.jchappelle.sg.crashhandler.CrashHandlerFactory;
+import com.jchappelle.sg.entities.EntityFactory;
+import com.jchappelle.sg.entities.EntityFactoryProvider;
 import com.jchappelle.sg.preferences.AppPreferences;
 import com.jchappelle.sg.preferences.AppPreferencesFactory;
 import com.jchappelle.sg.screens.*;
@@ -19,6 +22,7 @@ class SpaceGame extends Game implements GameManager {
 	private AppPreferences prefs;
 	private CrashHandler crashHandler;
 	private Map<SoundId, Sound> sounds = new HashMap<SoundId, Sound>();
+	private Entity player;
 
 	public void changeScreen(ScreenId screenId){
 		Screen screen = screens.get(screenId);
@@ -27,6 +31,14 @@ class SpaceGame extends Game implements GameManager {
 			screens.put(screenId, screen);
 		}
 		setScreen(screen);
+	}
+
+	public void setPlayer(Entity player){
+		this.player = player;
+	}
+
+	public Entity getPlayer(){
+		return player;
 	}
 
 	public AppPreferences getPreferences(){
@@ -44,6 +56,11 @@ class SpaceGame extends Game implements GameManager {
 		if(sound != null){
 			sound.play();
 		}
+	}
+
+	@Override
+	public EntityFactory getEntityFactory(){
+		return EntityFactoryProvider.getEntityFactory(this);
 	}
 
 	@Override

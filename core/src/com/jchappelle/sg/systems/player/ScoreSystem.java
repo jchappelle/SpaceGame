@@ -32,7 +32,9 @@ public class ScoreSystem extends EntitySystem implements EntityListener {
             if(sc != null){
                 Entity player = Entities.get().getPlayer();
                 PlayerComponent pc = PlayerComponent.get(player);
-                pc.score += sc.score;
+                if(pc != null){
+                    pc.score += sc.score;
+                }
             }
         }
     }

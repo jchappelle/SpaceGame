@@ -14,26 +14,31 @@ public class BodyComponent implements Component {
     }
 
     public Body body;
+    public BodyDef bodyDef;
+    public FixtureDef fixtureDef;
+    public PolygonShape shape;
 
+    private float width;
+    private float height;
 
-    public BodyComponent(World world, float x, float y, float width, float height, float density, short collisionCategory, short collisionMask){
-        BodyDef bodyDef = new BodyDef();
+    public BodyComponent(float x, float y, float width, float height, float density, short collisionCategory, short collisionMask){
+        this.width = width;
+        this.height = height;
+
+        bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
-        bodyDef.position.set((x + width/2) / Constants.PIXELS_TO_METERS, (y + height/2) / Constants.PIXELS_TO_METERS);
-        //bodyDef.position.set((x ) / Constants.PIXELS_TO_METERS, (y ) / Constants.PIXELS_TO_METERS);
-        body = world.createBody(bodyDef);
+        setPosition(x, y);
 
-        PolygonShape shape = new PolygonShape();
-
+        shape = new PolygonShape();
         shape.setAsBox(width/2 / Constants.PIXELS_TO_METERS, height /2 / Constants.PIXELS_TO_METERS, new Vector2(width/2/ Constants.PIXELS_TO_METERS,height/2/ Constants.PIXELS_TO_METERS),0);
-
-        FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
         fixtureDef.density = density;
         fixtureDef.filter.categoryBits = collisionCategory;
         fixtureDef.filter.maskBits = collisionMask;
+    }
 
-        body.createFixture(fixtureDef);
-        shape.dispose();
+    public void setPosition(float x, float y){
+        bodyDef.position.set((x + width/2) / Constants.PIXELS_TO_METERS, (y + height/2) / Constants.PIXELS_TO_METERS);
     }
 }

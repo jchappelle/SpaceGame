@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.jchappelle.sg.systems.physics.CollisionListener;
 import com.badlogic.gdx.utils.*;
+import com.jchappelle.sg.systems.player.PlayerComponent;
 
 public class DamageSystem extends EntitySystem implements CollisionListener {
 

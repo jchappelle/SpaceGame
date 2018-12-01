@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.utils.Disposable;
 import com.jchappelle.sg.AnimationComponent;
 import com.jchappelle.sg.Entities;
+import com.jchappelle.sg.GameManager;
 import com.jchappelle.sg.systems.level.LevelComponent;
 import com.jchappelle.sg.components.TransformComponent;
 import com.jchappelle.sg.systems.damage.HealthComponent;
@@ -24,8 +25,11 @@ public class RenderSystem extends EntitySystem implements Disposable {
     SpriteBatch batch;
     private OrthographicCamera camera;
     private BitmapFont font;
+    private GameManager gameManager;
 
-    public RenderSystem(){
+    public RenderSystem(GameManager gameManager){
+        this.gameManager = gameManager;
+
         batch = new SpriteBatch();
         camera = new OrthographicCamera(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         camera.position.set(camera.viewportWidth * .5f, camera.viewportHeight * .5f, 0f);
@@ -54,7 +58,7 @@ public class RenderSystem extends EntitySystem implements Disposable {
     }
 
     private void drawScore(){
-        Entity player = Entities.get().getPlayer();
+        Entity player = gameManager.getPlayer();
         PlayerComponent pc = PlayerComponent.get(player);
         font.draw(batch, "Score: " + pc.score, 10, Gdx.graphics.getHeight() - 10);
 
