@@ -1,4 +1,4 @@
-package com.jchappelle.sg.systems.player;
+package com.jchappelle.sg.systems.gun;
 
 import com.badlogic.ashley.core.*;
 import com.badlogic.gdx.Gdx;
@@ -6,7 +6,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.physics.box2d.World;
 import com.jchappelle.sg.Entities;
 import com.jchappelle.sg.GameManager;
-import com.jchappelle.sg.components.SpawnSourceComponent;
 import com.jchappelle.sg.components.TransformComponent;
 import com.jchappelle.sg.entities.Prefab;
 import com.jchappelle.sg.systems.physics.WorldComponent;

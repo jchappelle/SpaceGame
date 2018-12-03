@@ -9,8 +9,8 @@ import com.badlogic.gdx.utils.Disposable;
 import com.jchappelle.sg.*;
 import com.jchappelle.sg.components.InputProcessorComponent;
 import com.jchappelle.sg.entities.Prefab;
-import com.jchappelle.sg.systems.MusicSystem;
-import com.jchappelle.sg.systems.SoundSystem;
+import com.jchappelle.sg.systems.audio.MusicSystem;
+import com.jchappelle.sg.systems.audio.SoundSystem;
 import com.jchappelle.sg.systems.level.LevelComponent;
 import com.jchappelle.sg.systems.damage.DamageSystem;
 import com.jchappelle.sg.systems.AsteroidSystem;
@@ -18,9 +18,9 @@ import com.jchappelle.sg.systems.level.LevelSystem;
 import com.jchappelle.sg.systems.physics.CollisionSystem;
 import com.jchappelle.sg.systems.physics.PhysicsSystem;
 import com.jchappelle.sg.systems.physics.WorldComponent;
-import com.jchappelle.sg.systems.player.GunSystem;
+import com.jchappelle.sg.systems.gun.GunSystem;
 import com.jchappelle.sg.systems.player.PlayerSystem;
-import com.jchappelle.sg.systems.player.ScoreSystem;
+import com.jchappelle.sg.systems.score.ScoreSystem;
 import com.jchappelle.sg.systems.render.PhysicsRenderSystem;
 import com.jchappelle.sg.systems.render.RenderSystem;
 import com.jchappelle.sg.systems.DespawnSystem;
@@ -33,9 +33,6 @@ class GameScreen extends ScreenAdapter {
 
     GameScreen(GameManager gameManager){
         this.gameManager = gameManager;
-
-        System.out.println(Gdx.graphics.getWidth());
-        System.out.println(Gdx.graphics.getHeight());
 
         engine = new Engine();
         Entity gameEntity = new Entity();

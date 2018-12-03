@@ -30,8 +30,8 @@ public class RenderSystem extends EntitySystem implements Disposable {
         batch = new SpriteBatch();
         camera = new OrthographicCamera(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         camera.position.set(camera.viewportWidth * .5f, camera.viewportHeight * .5f, 0f);
-        font = new BitmapFont();
-        font.setColor(Color.WHITE);
+        font = gameManager.newFont(12);
+
     }
 
     public void addedToEngine(Engine engine) {

@@ -1,6 +1,7 @@
 package com.jchappelle.sg;
 
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.jchappelle.sg.audio.AudioManager;
 import com.jchappelle.sg.entities.EntityFactory;
 import com.jchappelle.sg.preferences.AppPreferences;
@@ -23,4 +24,5 @@ public interface GameManager extends PlayerProvider {
 
     ScrollingBackground getBackground();
 
+    BitmapFont newFont(int fontSize);
 }

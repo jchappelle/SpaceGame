@@ -6,7 +6,6 @@ import com.badlogic.gdx.Gdx;
 import com.jchappelle.sg.GameManager;
 import com.jchappelle.sg.components.DeathComponent;
 import com.jchappelle.sg.components.DespawnComponent;
-import com.jchappelle.sg.Entities;
 import com.jchappelle.sg.components.TransformComponent;
 import com.jchappelle.sg.entities.Prefab;
 

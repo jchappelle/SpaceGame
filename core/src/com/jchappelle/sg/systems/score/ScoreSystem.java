@@ -1,4 +1,4 @@
-package com.jchappelle.sg.systems.player;
+package com.jchappelle.sg.systems.score;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
@@ -7,6 +7,7 @@ import com.badlogic.ashley.core.EntitySystem;
 import com.jchappelle.sg.PlayerProvider;
 import com.jchappelle.sg.components.SpawnSourceComponent;
 import com.jchappelle.sg.systems.damage.HealthComponent;
+import com.jchappelle.sg.systems.player.PlayerComponent;
 
 public class ScoreSystem extends EntitySystem implements EntityListener {
 

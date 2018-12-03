@@ -9,7 +9,7 @@ import com.jchappelle.sg.components.TransformComponent;
 import com.jchappelle.sg.systems.damage.DamageComponent;
 import com.jchappelle.sg.systems.damage.HealthComponent;
 import com.jchappelle.sg.systems.physics.BodyComponent;
-import com.jchappelle.sg.systems.player.GunComponent;
+import com.jchappelle.sg.systems.gun.GunComponent;
 import com.jchappelle.sg.systems.player.PlayerComponent;
 import com.jchappelle.sg.systems.render.SpriteComponent;
 

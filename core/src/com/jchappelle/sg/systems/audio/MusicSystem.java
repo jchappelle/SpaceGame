@@ -1,4 +1,4 @@
-package com.jchappelle.sg.systems;
+package com.jchappelle.sg.systems.audio;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.EntitySystem;

@@ -12,7 +12,7 @@ import com.jchappelle.sg.systems.damage.DamageComponent;
 import com.jchappelle.sg.systems.damage.HealthComponent;
 import com.jchappelle.sg.systems.level.XpComponent;
 import com.jchappelle.sg.systems.physics.BodyComponent;
-import com.jchappelle.sg.systems.player.ScoreComponent;
+import com.jchappelle.sg.systems.score.ScoreComponent;
 import com.jchappelle.sg.systems.render.SpriteComponent;
 
 class AsteroidEntityFactory implements EntityFactory {

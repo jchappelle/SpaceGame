@@ -2,6 +2,8 @@ package com.jchappelle.sg;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.jchappelle.sg.audio.AudioManager;
 import com.jchappelle.sg.audio.AudioManagerFactory;
 import com.jchappelle.sg.crashhandler.CrashHandler;
@@ -33,12 +35,22 @@ class SpaceGame extends Game implements GameManager {
 
 	@Override
 	public void create () {
+
 		background = new ScrollingBackground();
 		prefs = AppPreferencesFactory.make();
 		crashHandler = CrashHandlerFactory.make(this);
 		audioManager = AudioManagerFactory.make(this);
 		new GameDB(this).load();
 		changeScreen(INITIAL_SCREEN);
+	}
+
+	public BitmapFont newFont(int fontSize){
+		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/press-start/prstart.ttf"));
+		FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+		parameter.size = fontSize;
+		BitmapFont font = generator.generateFont(parameter);
+		generator.dispose();
+		return font;
 	}
 
 	@Override
