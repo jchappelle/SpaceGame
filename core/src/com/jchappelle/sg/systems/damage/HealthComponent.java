@@ -16,6 +16,6 @@ public class HealthComponent implements Component {
 
     public HealthComponent(int health){
         this.health = health;
-        this.maxHealth = maxHealth;
+        this.maxHealth = health;
     }
 }

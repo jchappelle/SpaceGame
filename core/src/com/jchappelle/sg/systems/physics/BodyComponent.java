@@ -21,6 +21,7 @@ public class BodyComponent implements Component {
     public short collisionMask;
     public float width;
     public float height;
+    public boolean fixedRotation;
     public Vector2 linearVelocity;
     public Vector2 initialForce;
 }

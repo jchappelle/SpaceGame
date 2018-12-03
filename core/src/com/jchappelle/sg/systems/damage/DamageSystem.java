@@ -5,7 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.jchappelle.sg.systems.physics.CollisionListener;
 import com.badlogic.gdx.utils.*;
-import com.jchappelle.sg.systems.player.PlayerComponent;
+import com.jchappelle.sg.systems.status.InvincibilityComponent;
 
 public class DamageSystem extends EntitySystem implements CollisionListener {
 
@@ -38,19 +38,22 @@ public class DamageSystem extends EntitySystem implements CollisionListener {
     }
 
     private boolean tryDamage(Entity entityA, Entity entityB){
-        HealthComponent hc = HealthComponent.get(entityA);
-        DamageComponent dc = DamageComponent.get(entityB);
-        if(hc != null && dc != null){
-            hc.health -= dc.damage;
-            if(hc.health < 0){
-                hc.health = 0;
-            }
-            if(hc.health == 0){
-                hc.deathSource = entityB;
+        InvincibilityComponent ic = InvincibilityComponent.get(entityA);
+        if(ic == null){
+            HealthComponent hc = HealthComponent.get(entityA);
+            DamageComponent dc = DamageComponent.get(entityB);
+            if(hc != null && dc != null){
+                hc.health -= dc.damage;
+                if(hc.health < 0){
+                    hc.health = 0;
+                }
+                if(hc.health == 0){
+                    hc.deathSource = entityB;
 
-                engine.removeEntity(entityA);
+                    engine.removeEntity(entityA);
+                }
+                return true;
             }
-            return true;
         }
         return false;
     }

@@ -24,6 +24,7 @@ import com.jchappelle.sg.systems.score.ScoreSystem;
 import com.jchappelle.sg.systems.render.PhysicsRenderSystem;
 import com.jchappelle.sg.systems.render.RenderSystem;
 import com.jchappelle.sg.systems.DespawnSystem;
+import com.jchappelle.sg.systems.status.StatusEffectSystem;
 
 class GameScreen extends ScreenAdapter {
 
@@ -59,6 +60,7 @@ class GameScreen extends ScreenAdapter {
         engine.addSystem(new DamageSystem());
         engine.addSystem(new ScoreSystem(gameManager));
         engine.addSystem(new LevelSystem());
+        engine.addSystem(new StatusEffectSystem());
         //Should be added last to support CollisionListeners
         engine.addSystem(new CollisionSystem(world));
 

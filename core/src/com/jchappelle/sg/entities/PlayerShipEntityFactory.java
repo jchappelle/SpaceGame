@@ -12,6 +12,7 @@ import com.jchappelle.sg.systems.physics.BodyComponent;
 import com.jchappelle.sg.systems.gun.GunComponent;
 import com.jchappelle.sg.systems.player.PlayerComponent;
 import com.jchappelle.sg.systems.render.SpriteComponent;
+import com.jchappelle.sg.systems.status.InvincibilityComponent;
 
 class PlayerShipEntityFactory implements EntityFactory {
 
@@ -40,13 +41,14 @@ class PlayerShipEntityFactory implements EntityFactory {
         bc.density = 10f;
         bc.collisionCategory = Constants.CATEGORY_PLAYER;
         bc.collisionMask = Constants.MASK_PLAYER;
-
+        bc.fixedRotation = true;
         entity.add(tc);
         entity.add(bc);
         entity.add(new PlayerComponent());
         entity.add(new GunComponent());
         entity.add(new HealthComponent(30));
         entity.add(new DamageComponent(100));
+        //entity.add(new InvincibilityComponent(Long.MAX_VALUE));
         return entity;
     }
 }

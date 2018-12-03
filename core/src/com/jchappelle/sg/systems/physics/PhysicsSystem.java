@@ -134,7 +134,9 @@ public class PhysicsSystem extends EntitySystem implements EntityListener {
         fixtureDef.density = bc.density;
         fixtureDef.filter.categoryBits = bc.collisionCategory;
         fixtureDef.filter.maskBits = bc.collisionMask;
+
         bc.body = world.createBody(bodyDef);
+        bc.body.setFixedRotation(bc.fixedRotation);
         bc.body.createFixture(fixtureDef);
         shape.dispose();
 
