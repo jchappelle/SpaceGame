@@ -37,6 +37,9 @@ public class DespawnSystem extends EntitySystem implements EntityListener {
                 }
             }
             if(isOutOfBounds(entity)){
+                //Prevents other systems from reacting to this.
+                //For example, spawning explosions or playing death sounds
+                entity.removeAll();
                 engine.removeEntity(entity);
             }
         }
@@ -44,7 +47,7 @@ public class DespawnSystem extends EntitySystem implements EntityListener {
 
     private boolean isOutOfBounds(Entity entity){
         TransformComponent pc = TransformComponent.get(entity);
-        return (pc.x > Gdx.graphics.getWidth() || pc.x < 0) || (pc.y > Gdx.graphics.getHeight() + 200 || pc.y < 0);
+        return (pc.x > Gdx.graphics.getWidth() || (pc.x + pc.width) < 0) || (pc.y > Gdx.graphics.getHeight() + 200 || (pc.y + pc.height) < 0);
     }
 
     @Override
