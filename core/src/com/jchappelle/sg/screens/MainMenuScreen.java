@@ -5,6 +5,7 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -41,6 +42,11 @@ class MainMenuScreen extends ScreenAdapter {
         TextButton preferences = menuButton("Preferences", skin, ScreenId.PREFERENCES);
         TextButton exit = menuButton("Exit", skin, null);
 
+        table.add(new Label( "Space Game", skin)).center();
+        table.row().expandY();
+        table.row().pad(5);
+        table.row().pad(5);
+        table.row().pad(5);
         table.add(newGame).fillX().uniformX();
         table.row().pad(10, 0, 10, 0);
         table.add(preferences).fillX().uniformX();

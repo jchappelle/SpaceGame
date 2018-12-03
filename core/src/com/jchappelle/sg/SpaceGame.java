@@ -12,6 +12,7 @@ import com.jchappelle.sg.persistence.GameDB;
 import com.jchappelle.sg.preferences.AppPreferences;
 import com.jchappelle.sg.preferences.AppPreferencesFactory;
 import com.jchappelle.sg.screens.*;
+import com.jchappelle.sg.systems.render.ScrollingBackground;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,9 +29,11 @@ class SpaceGame extends Game implements GameManager {
 	private AudioManager audioManager;
 	private ScreenId currentScreen;
 	private ScreenId lastScreen;
+	private ScrollingBackground background;
 
 	@Override
 	public void create () {
+		background = new ScrollingBackground();
 		prefs = AppPreferencesFactory.make();
 		crashHandler = CrashHandlerFactory.make(this);
 		audioManager = AudioManagerFactory.make(this);
@@ -73,6 +76,11 @@ class SpaceGame extends Game implements GameManager {
 	}
 
 	@Override
+	public ScrollingBackground getBackground(){
+		return background;
+	}
+
+	@Override
 	public void setPlayer(Entity player){
 		this.player = player;
 	}
@@ -96,6 +104,12 @@ class SpaceGame extends Game implements GameManager {
 	@Override
 	public AudioManager getAudioManager(){
 		return audioManager;
+	}
+
+	@Override
+	public void resize(int width, int height){
+		this.background.resize(width, height);
+		super.resize(width, height);
 	}
 
 	@Override

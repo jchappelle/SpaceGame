@@ -46,6 +46,7 @@ public class RenderSystem extends EntitySystem implements Disposable {
         batch.setProjectionMatrix(camera.combined);
 
         batch.begin();
+        gameManager.getBackground().updateAndRender(deltaTime, batch);
         for (int i = 0; i < entities.size(); ++i) {
             renderEntity(entities.get(i), deltaTime);
         }

@@ -5,6 +5,7 @@ import com.jchappelle.sg.audio.AudioManager;
 import com.jchappelle.sg.entities.EntityFactory;
 import com.jchappelle.sg.preferences.AppPreferences;
 import com.jchappelle.sg.screens.ScreenId;
+import com.jchappelle.sg.systems.render.ScrollingBackground;
 
 public interface GameManager extends PlayerProvider {
 
@@ -19,5 +20,7 @@ public interface GameManager extends PlayerProvider {
     EntityFactory getEntityFactory();
 
     AudioManager getAudioManager();
+
+    ScrollingBackground getBackground();
 
 }

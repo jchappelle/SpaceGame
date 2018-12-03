@@ -23,6 +23,7 @@ import com.jchappelle.sg.systems.player.ScoreSystem;
 import com.jchappelle.sg.systems.render.PhysicsRenderSystem;
 import com.jchappelle.sg.systems.render.RenderSystem;
 import com.jchappelle.sg.systems.DespawnSystem;
+import com.jchappelle.sg.systems.render.ScrollingBackground;
 
 class GameScreen extends ScreenAdapter {
 
@@ -32,6 +33,10 @@ class GameScreen extends ScreenAdapter {
 
     GameScreen(GameManager gameManager){
         this.gameManager = gameManager;
+
+        System.out.println(Gdx.graphics.getWidth());
+        System.out.println(Gdx.graphics.getHeight());
+
         engine = new Engine();
         Entity gameEntity = new Entity();
         WorldComponent worldComponent = new WorldComponent();
