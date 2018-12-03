@@ -22,11 +22,20 @@ public class TransformComponent implements Component {
 
     public TransformComponent(){}
 
+    public TransformComponent(float x, float y){
+        this.x = x;
+        this.y = y;
+    }
+
     public TransformComponent(float x, float y, float rotation, float width, float height){
         this.x = x;
         this.y = y;
         this.rotation = rotation;
         this.width = width;
         this.height = height;
+    }
+
+    public TransformComponent copy(){
+        return new TransformComponent(x, y, rotation, width, height);
     }
 }

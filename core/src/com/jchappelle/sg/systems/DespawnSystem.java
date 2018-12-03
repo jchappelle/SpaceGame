@@ -3,15 +3,23 @@ package com.jchappelle.sg.systems;
 import com.badlogic.ashley.core.*;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
+import com.jchappelle.sg.GameManager;
 import com.jchappelle.sg.components.DeathComponent;
 import com.jchappelle.sg.components.DespawnComponent;
 import com.jchappelle.sg.Entities;
 import com.jchappelle.sg.components.TransformComponent;
+import com.jchappelle.sg.entities.Prefab;
 
 public class DespawnSystem extends EntitySystem implements EntityListener {
 
     private ImmutableArray<Entity> entities;
     private Engine engine;
+
+    private GameManager gameManager;
+
+    public DespawnSystem(GameManager gameManager){
+        this.gameManager = gameManager;
+    }
 
     public void addedToEngine(Engine engine){
         entities = engine.getEntitiesFor(Family.all(TransformComponent.class).get());
@@ -50,7 +58,8 @@ public class DespawnSystem extends EntitySystem implements EntityListener {
         if(dc != null){
             if(dc.explode){
                 TransformComponent tc = TransformComponent.get(entity);
-                this.engine.addEntity(Entities.get().newExplosion(tc.x, tc.y));
+                Entity explosion = gameManager.getEntityFactory().make(Prefab.EXPLOSION, tc.copy());
+                this.engine.addEntity(explosion);
             }
         }
     }

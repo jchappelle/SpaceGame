@@ -8,6 +8,7 @@ import com.jchappelle.sg.Entities;
 import com.jchappelle.sg.GameManager;
 import com.jchappelle.sg.components.SpawnSourceComponent;
 import com.jchappelle.sg.components.TransformComponent;
+import com.jchappelle.sg.entities.Prefab;
 import com.jchappelle.sg.systems.physics.WorldComponent;
 
 public class GunSystem extends EntitySystem {
@@ -33,10 +34,12 @@ public class GunSystem extends EntitySystem {
         boolean firing = Gdx.input.isKeyPressed(Input.Keys.SPACE);
         if(firing){
             Entity player = gameManager.getPlayer();
-            GunComponent gun = GunComponent.get(player);
-            if(canFire(gun)){
-                fire(player);
-                gun.lastBulletShot = System.currentTimeMillis();
+            if(player != null){
+                GunComponent gun = GunComponent.get(player);
+                if(canFire(gun)){
+                    fire(player);
+                    gun.lastBulletShot = System.currentTimeMillis();
+                }
             }
         }
     }
@@ -45,10 +48,9 @@ public class GunSystem extends EntitySystem {
         TransformComponent tc = TransformComponent.get(player);
         float x = tc.x + tc.width/2 - 4;
         float y = tc.y + tc.height/2 + 16;
-        Entity entity = Entities.get().newBullet(x, y);
-        entity.add(new SpawnSourceComponent(gameManager.getPlayer()));
 
-        engine.addEntity(Entities.get().newBullet(x, y));
+        Entity bullet = gameManager.getEntityFactory().make(Prefab.BULLET, new TransformComponent(x, y));
+        engine.addEntity(bullet);
     }
 
     private boolean canFire(GunComponent gc){

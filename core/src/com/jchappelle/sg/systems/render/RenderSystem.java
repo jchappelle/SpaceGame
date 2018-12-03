@@ -57,14 +57,16 @@ public class RenderSystem extends EntitySystem implements Disposable {
 
     private void drawScore(){
         Entity player = gameManager.getPlayer();
-        PlayerComponent pc = PlayerComponent.get(player);
-        font.draw(batch, "Score: " + pc.score, 10, Gdx.graphics.getHeight() - 10);
+        if(player != null){
+            PlayerComponent pc = PlayerComponent.get(player);
+            font.draw(batch, "Score: " + pc.score, 10, Gdx.graphics.getHeight() - 10);
 
-        HealthComponent hc = HealthComponent.get(player);
-        font.draw(batch, "Health: " + hc.health, 10, Gdx.graphics.getHeight() - 30);
+            HealthComponent hc = HealthComponent.get(player);
+            font.draw(batch, "Health: " + hc.health, 10, Gdx.graphics.getHeight() - 30);
 
-        LevelComponent lc = LevelComponent.get(Entities.get().getGame());
-        font.draw(batch, "Level: " + lc.level, 10, Gdx.graphics.getHeight() - 50);
+            LevelComponent lc = LevelComponent.get(Entities.get().getGame());
+            font.draw(batch, "Level: " + lc.level, 10, Gdx.graphics.getHeight() - 50);
+        }
     }
 
     private void renderEntity(Entity entity, float deltaTime){

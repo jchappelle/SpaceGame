@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Disposable;
 import com.jchappelle.sg.*;
 import com.jchappelle.sg.components.InputProcessorComponent;
+import com.jchappelle.sg.entities.Prefab;
 import com.jchappelle.sg.systems.MusicSystem;
 import com.jchappelle.sg.systems.SoundSystem;
 import com.jchappelle.sg.systems.level.LevelComponent;
@@ -23,7 +24,6 @@ import com.jchappelle.sg.systems.player.ScoreSystem;
 import com.jchappelle.sg.systems.render.PhysicsRenderSystem;
 import com.jchappelle.sg.systems.render.RenderSystem;
 import com.jchappelle.sg.systems.DespawnSystem;
-import com.jchappelle.sg.systems.render.ScrollingBackground;
 
 class GameScreen extends ScreenAdapter {
 
@@ -58,14 +58,14 @@ class GameScreen extends ScreenAdapter {
         engine.addSystem(new PlayerSystem(gameManager));
         engine.addSystem(new GunSystem(gameManager));
         engine.addSystem(new AsteroidSystem(gameManager));
-        engine.addSystem(new DespawnSystem());
+        engine.addSystem(new DespawnSystem(gameManager));
         engine.addSystem(new DamageSystem());
         engine.addSystem(new ScoreSystem(gameManager));
         engine.addSystem(new LevelSystem());
         //Should be added last to support CollisionListeners
         engine.addSystem(new CollisionSystem(world));
 
-        Entity player = Entities.get().newShip();
+        Entity player = gameManager.getEntityFactory().make(Prefab.PLAYER_SHIP);
         gameManager.setPlayer(player);
         engine.addEntity(player);
 

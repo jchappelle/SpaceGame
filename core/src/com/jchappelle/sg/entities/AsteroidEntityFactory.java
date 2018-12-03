@@ -12,31 +12,38 @@ import com.jchappelle.sg.systems.damage.DamageComponent;
 import com.jchappelle.sg.systems.damage.HealthComponent;
 import com.jchappelle.sg.systems.level.XpComponent;
 import com.jchappelle.sg.systems.physics.BodyComponent;
-import com.jchappelle.sg.systems.physics.InitialForceComponent;
 import com.jchappelle.sg.systems.player.ScoreComponent;
 import com.jchappelle.sg.systems.render.SpriteComponent;
 
 class AsteroidEntityFactory implements EntityFactory {
 
-    public Entity make(Prefab prefab){
-        Entity entity = newEntity("asteroid.png", 10f, Constants.CATEGORY_ENEMY, Constants.MASK_ENEMY);
-        entity.add(new InitialForceComponent(new Vector2(0, -20f)));
+    public Entity make(String prefabId, TransformComponent transform){
+        return make(prefabId);
+    }
+
+    public Entity make(String prefab){
+        Entity entity = new Entity();
+        Sprite sprite = new Sprite(new Texture("asteroid.png"));
+        entity.add(new SpriteComponent(sprite));
+        TransformComponent tc = new TransformComponent(0, 0, 0, sprite.getWidth(), sprite.getHeight());
+
+        BodyComponent bc = new BodyComponent();
+        bc.initialX = tc.x;
+        bc.initialY = tc.y;
+        bc.width = tc.width;
+        bc.height = tc.height;
+        bc.density = 10f;
+        bc.collisionCategory = Constants.CATEGORY_ENEMY;
+        bc.collisionMask = Constants.MASK_ENEMY;
+        bc.initialForce = new Vector2(0, -20f);
+        entity.add(bc);
+        entity.add(tc);
+
         entity.add(new HealthComponent(10));
         entity.add(new DamageComponent(10));
         entity.add(new ScoreComponent(10));
         entity.add(new XpComponent(5));
         entity.add(new DeathComponent(SoundId.ASTEROID_EXPLOSION, true));
-        return entity;
-    }
-
-    private Entity newEntity(String spritePath, float density, short collisionCategory, short collisionMask){
-        Entity entity = new Entity();
-        Sprite sprite = new Sprite(new Texture(spritePath));
-        entity.add(new SpriteComponent(sprite));
-
-        TransformComponent tc = new TransformComponent(0, 0, 0, sprite.getWidth(), sprite.getHeight());
-        entity.add(new BodyComponent(tc.x, tc.y, tc.width, tc.height, density, collisionCategory, collisionMask));
-        entity.add(tc);
         return entity;
     }
 

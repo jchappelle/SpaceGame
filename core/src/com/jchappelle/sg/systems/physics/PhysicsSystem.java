@@ -114,20 +114,33 @@ public class PhysicsSystem extends EntitySystem implements EntityListener {
         if(bc != null){
             if(needsInitialization(bc)){
                 TransformComponent tc = TransformComponent.get(entity);
-                bc.setPosition(tc.x, tc.y);
-                bc.body = world.createBody(bc.bodyDef);
-                bc.body.createFixture(bc.fixtureDef);
-                bc.fixtureDef = null;
-                bc.bodyDef = null;
-                bc.shape.dispose();
-            }
-
-            InitialForceComponent ifc = InitialForceComponent.get(entity);
-            if(ifc != null){
-                bc.body.applyForceToCenter(ifc.force, true);
+                setupBody(bc, tc.x, tc.y);
             }
         }
+    }
 
+    private void setupBody(BodyComponent bc, float x, float y){
+        BodyDef bodyDef = new BodyDef();
+        if(bc.linearVelocity != null){
+            bodyDef.linearVelocity.set(bc.linearVelocity);
+        }
+
+        bodyDef.type = BodyDef.BodyType.DynamicBody;
+        bodyDef.position.set((x + bc.width/2) / Constants.PIXELS_TO_METERS, (y + bc.height/2) / Constants.PIXELS_TO_METERS);
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(bc.width/2 / Constants.PIXELS_TO_METERS, bc.height /2 / Constants.PIXELS_TO_METERS, new Vector2(bc.width/2/ Constants.PIXELS_TO_METERS,bc.height/2/ Constants.PIXELS_TO_METERS),0);
+        FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.shape = shape;
+        fixtureDef.density = bc.density;
+        fixtureDef.filter.categoryBits = bc.collisionCategory;
+        fixtureDef.filter.maskBits = bc.collisionMask;
+        bc.body = world.createBody(bodyDef);
+        bc.body.createFixture(fixtureDef);
+        shape.dispose();
+
+        if(bc.initialForce != null){
+            bc.body.applyForceToCenter(bc.initialForce, true);
+        }
     }
 
     @Override
