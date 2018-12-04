@@ -8,6 +8,7 @@ import com.jchappelle.sg.GameManager;
 import com.jchappelle.sg.components.TransformComponent;
 import com.jchappelle.sg.systems.damage.DamageComponent;
 import com.jchappelle.sg.systems.damage.HealthComponent;
+import com.jchappelle.sg.systems.gun.MultishotComponent;
 import com.jchappelle.sg.systems.physics.BodyComponent;
 import com.jchappelle.sg.systems.gun.GunComponent;
 import com.jchappelle.sg.systems.player.PlayerComponent;
@@ -48,6 +49,7 @@ class PlayerShipEntityFactory implements EntityFactory {
         entity.add(new GunComponent());
         entity.add(new HealthComponent(30));
         entity.add(new DamageComponent(100));
+        entity.add(new MultishotComponent(7));
         //entity.add(new InvincibilityComponent(Long.MAX_VALUE));
         return entity;
     }
