@@ -18,7 +18,7 @@ public class StatusEffectSystem extends EntitySystem {
             InvincibilityComponent ic = InvincibilityComponent.get(entity);
             if(ic != null){
                 ic.timeElapsed += deltaTime;
-                if(ic.timeElapsed > ic.time){
+                if(ic.timeElapsed > ic.timeToLive){
                     entity.remove(InvincibilityComponent.class);
                 }
             }

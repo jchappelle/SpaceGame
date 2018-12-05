@@ -5,6 +5,8 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.jchappelle.sg.systems.physics.CollisionListener;
 import com.badlogic.gdx.utils.*;
+import com.jchappelle.sg.systems.player.PlayerComponent;
+import com.jchappelle.sg.systems.render.BlinkingComponent;
 import com.jchappelle.sg.systems.status.InvincibilityComponent;
 
 public class DamageSystem extends EntitySystem implements CollisionListener {
@@ -51,6 +53,19 @@ public class DamageSystem extends EntitySystem implements CollisionListener {
                     hc.deathSource = entityB;
 
                     engine.removeEntity(entityA);
+                }
+                else{
+                    Entity player = entityA;
+                    PlayerComponent pc = PlayerComponent.get(entityA);
+                    if(pc == null){
+                        pc = PlayerComponent.get(entityB);
+                        player = entityB;
+                    }
+                    if(pc != null){
+                        float invincibleTime = 2;
+                        player.add(new BlinkingComponent(invincibleTime, 10));
+                        player.add(new InvincibilityComponent(invincibleTime));
+                    }
                 }
                 return true;
             }

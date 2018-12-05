@@ -88,8 +88,8 @@ public class PhysicsSystem extends EntitySystem implements EntityListener {
     }
 
     private void doPhysicsStep(float deltaTime) {
-        // fixed time step
-        // max frame time to avoid spiral of death (on slow devices)
+        // fixed timeToLive step
+        // max frame timeToLive to avoid spiral of death (on slow devices)
         float frameTime = Math.min(deltaTime, 0.25f);
         accumulator += frameTime;
         while (accumulator >= TIME_STEP) {

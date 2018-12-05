@@ -1,9 +1,6 @@
 package com.jchappelle.sg.systems.player;
 
-import com.badlogic.ashley.core.Engine;
-import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.core.EntitySystem;
-import com.badlogic.ashley.core.Family;
+import com.badlogic.ashley.core.*;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -11,8 +8,9 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.jchappelle.sg.GameManager;
 import com.jchappelle.sg.screens.ScreenId;
 import com.jchappelle.sg.systems.physics.BodyComponent;
+import com.jchappelle.sg.systems.physics.CollisionListener;
 
-public class PlayerSystem extends EntitySystem {
+public class PlayerSystem extends EntitySystem implements CollisionListener {
 
     float speed = 5f;
     private Body body;
@@ -69,5 +67,9 @@ public class PlayerSystem extends EntitySystem {
             }
         }
         return body;
+    }
+
+    @Override
+    public void onCollision(Entity entityA, Entity entityB) {
     }
 }

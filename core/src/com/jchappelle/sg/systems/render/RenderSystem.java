@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.*;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Disposable;
 import com.jchappelle.sg.Entities;
 import com.jchappelle.sg.GameManager;
@@ -74,9 +75,27 @@ public class RenderSystem extends EntitySystem implements Disposable {
 
         SpriteComponent sc = SpriteComponent.get(entity);
         if(sc != null){
+            float alpha = 1;
+            BlinkingComponent bc = BlinkingComponent.get(entity);
+            if(bc != null){
+                bc.timer += deltaTime;
+                bc.blinkTimer += bc.speed * deltaTime;
+                if(bc.timer > bc.timeToLive){
+                    entity.remove(BlinkingComponent.class);
+                }
+                else{
+                    alpha = (float)Math.abs(Math.sin(bc.blinkTimer));
+                }
+            }
+
             Sprite sprite = sc.sprite;
             sprite.setOriginCenter();
-            batch.draw(sprite, tc.x, tc.y, tc.originX, tc.originY, tc.width, tc.height, tc.scaleX, tc.scaleY, tc.rotation);
+            sprite.setPosition(tc.x, tc.y);
+            sprite.setOrigin(tc.originX, tc.originY);
+            sprite.setSize(tc.width, tc.height);
+            sprite.setScale(tc.scaleX, tc.scaleY);
+            sprite.setRotation(tc.rotation);
+            sprite.draw(batch, alpha);
         }
 
         AnimationComponent ac = AnimationComponent.get(entity);

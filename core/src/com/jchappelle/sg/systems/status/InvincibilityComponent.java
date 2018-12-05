@@ -10,12 +10,12 @@ public class InvincibilityComponent implements Component {
         return mapper.get(entity);
     }
 
-    public float time;
+    public float timeToLive;
     public float timeElapsed;
 
     public InvincibilityComponent(){}
 
-    public InvincibilityComponent(float time){
-        this.time = time;
+    public InvincibilityComponent(float timeToLive){
+        this.timeToLive = timeToLive;
     }
 }
